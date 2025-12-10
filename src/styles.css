@@ -1,1 +1,28 @@
-/* You can add global styles to this file, and also import other style files */
+/* * ESTE ES EL PASO CRÍTICO:
+ * Las directivas @tailwind inyectan todas las clases de utilidad de Tailwind CSS.
+ * DEBEN estar al principio del archivo de estilos global.
+ */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* * Estilos personalizados.
+ * Estos deben ir después de las directivas de Tailwind.
+ */
+
+/* Ajuste para el icono gigante usado en el componente de clima */
+.huge-icon {
+    font-size: 6rem;
+    line-height: 1;
+}
+
+/* Ocultar scrollbar para navegadores basados en Webkit (Chrome, Safari) */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ocultar scrollbar para IE, Edge y Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
