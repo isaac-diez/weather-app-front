@@ -73,7 +73,7 @@ export class WeatherService {
   }
 
   getGeminiSuggestion(prompt: string): Observable<string> {
-    const apiKey = `***REMOVED***`;
+    const apiKey = `APIKEY`;
     const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
 
     const payload = {
