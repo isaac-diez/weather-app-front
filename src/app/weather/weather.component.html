@@ -63,14 +63,13 @@
             </span>
           </div>
 
-          <!-- Icon -->
-          <i class="bi huge-icon text-white drop-shadow-md my-4"
-             [ngClass]="getWeatherIconClass(currentWeather.isDay, currentWeather.precipitation, currentWeather.cloudCover)">
-          </i>
-
           <!-- Temperature -->
           <div class="text-[7rem] leading-none font-bold tracking-tighter drop-shadow-sm">
             {{ currentWeather.temperature }}°
+            <!-- Icon -->
+            <i class="bi huge-icon text-white drop-shadow-md my-4"
+               [ngClass]="getWeatherIconClass(currentWeather.isDay, currentWeather.precipitation, currentWeather.cloudCover)">
+            </i>
           </div>
 
           <!-- Condition & RealFeel -->
@@ -200,7 +199,7 @@
       <h3 class="text-xl font-bold text-slate-800 mb-5">7-Day forecast</h3>
 
       <!-- Horizontal Scroll Container -->
-      <div class="flex overflow-x-auto pb-6 gap-4 snap-x">
+      <div class="flex overflow-x-auto pb-6 gap-2 snap-x">
         <div *ngFor="let day of forecast.days"
              class="min-w-[120px] bg-white rounded-3xl p-4 flex flex-col items-center justify-between shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start border border-slate-100 h-48">
 
