@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { WeatherService, CityDTO, CurrentWeatherDTO, ForecastDTO, CityListDTO } from '../weather.service';
+import { WeatherService, CityDTO, CurrentWeatherDTO, ForecastDTO, CityListDTO, GeminiRequest } from '../weather.service';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -103,30 +103,25 @@ export class WeatherComponent {
 }
 
   askAi(mode: 'outfit' | 'activity' | 'laundry' | 'drink') {
-    if (!this.currentWeather) return;
+    if (!this.currentWeather || !this.selectedCity) return;
 
     this.isAiLoading = true;
     this.aiResponse = null;
     this.aiError = null;
     this.activeAiMode = mode;
 
-    const city = this.currentWeather.city;
-    const temp = this.currentWeather.temperature;
-    const isRaining = this.currentWeather.precipitation > 0;
+    // Se eliminan todas las variables y la lógica de construcción del 'prompt' del frontend.
+    // El backend se encargará de determinar las condiciones climáticas y el texto de la consulta.
 
-    let prompt = '';
+    const request: GeminiRequest = {
+        mode: mode,
+        latitude: this.selectedCity.latitude,
+        longitude: this.selectedCity.longitude,
+        city: this.selectedCity.name // El backend usa esta información y el 'mode' para construir el prompt.
+    };
 
-    if (mode === 'outfit') {
-      prompt = `Estilista de moda: Estoy en ${city}, ${temp}°C. ${isRaining ? 'Llueve' : 'Sin lluvia'}. Recomienda outfit breve (max 30 palabras) con emojis. No indiques número de palabras.`;
-    } else if (mode === 'activity') {
-      prompt = `Guía local: Estoy en ${city}, ${temp}°C. ${isRaining ? 'Llueve' : 'Sin lluvia'}. 2 actividades breves ahora mismo (max 50 palabras) con emojis. Si no encuentras nada interesante para hacer en ${city}, responde sobre la ciudad más importante más cercana. No indiques número de palabras.`;
-    } else if (mode === 'laundry') {
-      prompt = `Experto en hogar: Estoy en ${city}, ${temp}°C, humedad ${this.currentWeather.relativeHumidity}%, nubes ${this.currentWeather.cloudCover}%. ¿Es buen momento para hacer una colada y tender la ropa fuera? Responde Si es buen momento para hacer la colada o no y por qué en 1 frase corta y divertida. No indiques número de palabras.`;
-    } else if (mode === 'drink') {
-      prompt = `Experto en bares: Estoy en ${city}, ${temp}°C, humedad ${this.currentWeather.relativeHumidity}%, nubes ${this.currentWeather.cloudCover}%. Recomienda un bar conocido y popular donde tomar algo y donde es mejor sentarse: dentro del establecimiento o en la terraza. Responde por qué en 1 frase corta y divertida. No te repitas, no indiques número de palabras ni devuelvas el texto en markdown`;
-    }
-
-    this.weatherService.getGeminiSuggestion(prompt).subscribe({
+    // Usar el método correcto del servicio: getAiSuggestion
+    this.weatherService.getAiSuggestion(request).subscribe({
       next: (response: string) => {
         this.aiResponse = response;
         this.isAiLoading = false;
