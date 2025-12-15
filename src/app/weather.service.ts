@@ -44,6 +44,13 @@ export interface ForecastDTO {
   days: ForecastDayDTO[];
 }
 
+export interface GeminiRequest {
+mode: 'outfit' | 'activity' | 'laundry' | 'drink' | string;
+latitude: number;
+longitude: number;
+city: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -72,50 +79,10 @@ export class WeatherService {
     return this.http.post<ForecastDTO>(`${this.baseUrl}/forecast`, city);
   }
 
-  getGeminiSuggestion(prompt: string): Observable<string> {
-    const apiKey = `APIKEY`;
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+ getAiSuggestion(request: GeminiRequest): Observable<string> {
+    return this.http.post(`${this.baseUrl}/gemini-suggest`, request, {
+      responseType: 'text'
+    });
 
-    const payload = {
-      contents: [{
-        parts: [{ text: prompt }]
-      }]
-    };
-
-    const maxRetries = 3;
-
-    return from(fetch(url, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
-    }).then(async response => {
-      if (!response.ok) {
-        const errorDetails = await response.text();
-        console.error('Gemini API Non-OK Response:', response.status, errorDetails);
-        throw new Error(`API Error: ${response.status}`);
-      }
-      return response.json();
-    })).pipe(
-      retry({
-        count: maxRetries,
-        delay: (error, retryCount) => {
-          if (retryCount >= maxRetries) {
-            return throwError(() => new Error('Error de conexión persistente con la IA.'));
-          }
-          const delayTime = Math.pow(2, retryCount) * 1000;
-          return new Observable(observer => {
-            const timeout = setTimeout(() => observer.next(undefined), delayTime);
-            return () => clearTimeout(timeout);
-          });
-        }
-      }),
-      map((data: any) => { // Mantengo 'any' para la respuesta JSON, pero aseguro el retorno 'string'
-        return data.candidates?.[0]?.content?.parts?.[0]?.text || 'No se pudo generar una sugerencia.';
-      }),
-      catchError(err => {
-        console.error('Error final de Gemini API después de reintentos:', err);
-        return throwError(() => new Error('Falló la consulta a la IA (inténtalo más tarde).'));
-      })
-    );
   }
 }
