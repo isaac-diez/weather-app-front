@@ -1,13 +1,10 @@
-# Redirección para que Angular maneje las rutas (Evita el error 404 al refrescar)
-[[redirects]]
-from = "/*"
-to = "/index.html"
-status = 200
-
-# Opcional: Redirección para el API (Proxy)
-# Esto permite que en el front pongas "/api/weather" y Netlify lo mande a Render
 [[redirects]]
 from = "/api/*"
 to = "https://weather-app-back-1pk8.onrender.com/api/:splat"
 status = 200
 force = true
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
