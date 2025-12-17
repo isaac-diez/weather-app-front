@@ -8,6 +8,6 @@ status = 200
 # Esto permite que en el front pongas "/api/weather" y Netlify lo mande a Render
 [[redirects]]
 from = "/api/*"
-to = "https://weather-app-back-1pk8.onrender.com/:splat"
+to = "https://weather-app-back-1pk8.onrender.com/api/:splat"
 status = 200
 force = true
