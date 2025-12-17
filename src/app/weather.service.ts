@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, from, throwError } from 'rxjs';
 import { map, tap, catchError, retry } from 'rxjs/operators';
+import { environment } from '../environments/environment';
 
-// Las interfaces deben exportarse para ser usadas por el componente
 export interface CityDTO {
   name: string;
   country: string;
