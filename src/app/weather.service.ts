@@ -56,8 +56,7 @@ city: string;
 })
 export class WeatherService {
 
-  // ATENCIÓN: Esta URL asume que el backend Java se ejecuta en localhost:8080.
-  private baseUrl = 'http://localhost:8080/api/weather';
+  private baseUrl = `${environment.apiUrl}/weather`;
 
   constructor(private http: HttpClient) { }
 
