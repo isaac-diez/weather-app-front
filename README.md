@@ -14,6 +14,7 @@ Interfaz de usuario moderna y responsiva para la aplicación Smart Weather. Desa
          alt="Main title and search bar">
     <figcaption>Main title and search bar</figcaption>
 </figure>
+
 ![Cities found according to user input](screenshots/search_bar_with_found_cities.png)
 Cities found according to user input
 ![Weather for selected city](screenshots/weather_for_selected_city.png)
