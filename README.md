@@ -15,12 +15,23 @@ Interfaz de usuario moderna y responsiva para la aplicación Smart Weather. Desa
     <figcaption>Main title and search bar</figcaption>
 </figure>
 
-![Cities found according to user input](screenshots/search_bar_with_found_cities.png)
-Cities found according to user input
-![Weather for selected city](screenshots/weather_for_selected_city.png)
-Weather for selected city
-![AI suggestion](screenshots/ai_suggestion_response.png)
-AI suggestion
+<figure>
+    <img src="/screenshots/search_bar_with_found_cities.png"
+         alt="Cities found according to user input">
+    <figcaption>Cities found according to user input</figcaption>
+</figure>
+
+<figure>
+    <img src="/screenshots/weather_for_selected_city.png"
+         alt="Weather for selected city">
+    <figcaption>Weather for selected city</figcaption>
+</figure>
+
+<figure>
+    <img src="/ai_suggestion_response.png"
+         alt="AI suggestion">
+    <figcaption>AI suggestion</figcaption>
+</figure>
 
 ## 🚀 Características Principales
 
