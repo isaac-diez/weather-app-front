@@ -10,9 +10,10 @@ Interfaz de usuario moderna y responsiva para la aplicación Smart Weather. Desa
 
 ## 📸 Screenshots
 <figure>
+<figcaption>Main title and search bar</figcaption>
     <img src="/screenshots/search_bar.png"
          alt="Main title and search bar">
-    <figcaption>Main title and search bar</figcaption>
+    
 </figure>
 
 <figure>
@@ -28,7 +29,7 @@ Interfaz de usuario moderna y responsiva para la aplicación Smart Weather. Desa
 </figure>
 
 <figure>
-    <img src="/ai_suggestion_response.png"
+    <img src="/screenshots/ai_suggestion_response.png"
          alt="AI suggestion">
     <figcaption>AI suggestion</figcaption>
 </figure>
