@@ -9,8 +9,11 @@
 Interfaz de usuario moderna y responsiva para la aplicación Smart Weather. Desarrollada en Angular, se conecta con el backend para mostrar el clima y las recomendaciones inteligentes de la IA.
 
 ## 📸 Screenshots
-![Main title and search bar{caption=Some caption}](screenshots/search_bar.png)
-Main title and search bar
+<figure>
+    <img src="/screenshots/search_bar.png"
+         alt="Main title and search bar">
+    <figcaption>Main title and search bar</figcaption>
+</figure>
 ![Cities found according to user input](screenshots/search_bar_with_found_cities.png)
 Cities found according to user input
 ![Weather for selected city](screenshots/weather_for_selected_city.png)
