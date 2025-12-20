@@ -69,7 +69,7 @@ export class WeatherService {
       .pipe(
         map(data => ({
         ...data,
-        conditionText: data.conditionText ?? (data.precipitation > 0 ? 'Lluvia' : data.cloudCover > 50 ? 'Nublado' : 'Despejado')
+        conditionText: data.conditionText ?? (data.precipitation > 0 ? 'Rainy' : data.cloudCover > 50 ? 'Cloudy' : 'Clear')
       })));
   }
 
