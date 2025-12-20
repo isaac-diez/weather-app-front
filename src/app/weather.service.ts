@@ -67,7 +67,6 @@ export class WeatherService {
   getCurrentWeather(city: CityDTO): Observable<CurrentWeatherDTO> {
     return this.http.post<CurrentWeatherDTO>(`${this.baseUrl}/current`, city)
       .pipe(
-        tap(data => console.log('Datos Crudos del Backend:', data)),
         map(data => ({
         ...data,
         conditionText: data.conditionText ?? (data.precipitation > 0 ? 'Lluvia' : data.cloudCover > 50 ? 'Nublado' : 'Despejado')
