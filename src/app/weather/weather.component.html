@@ -18,12 +18,11 @@
         <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
           <i class="bi bi-search text-slate-400 text-lg"></i>
         </span>
-        <!-- Note: [(ngModel)] y (input) requieren que FormsModule esté importado en app.module.ts -->
         <input type="text"
                class="w-full py-3.5 pl-12 pr-4 text-slate-700 bg-white rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-slate-400 transition-all"
                [(ngModel)]="searchName"
                (input)="searchCities()"
-               placeholder="Search for a city..."
+               [placeholder]="'SEARCH_PLACEHOLDER' | translate"
                autocomplete="off">
       </div>
 
@@ -59,7 +58,7 @@
           <div class="flex items-center gap-3 mb-2">
             <h2 class="text-3xl md:text-4xl font-bold tracking-tight">{{ currentWeather.city }}</h2>
             <span class="bg-white/20 backdrop-blur-md text-xs font-bold px-2 py-1 rounded-md uppercase tracking-wider shadow-sm">
-              NOW
+              {{ 'WEATHER.NOW' | translate }}
             </span>
           </div>
 
@@ -74,8 +73,8 @@
 
           <!-- Condition & RealFeel -->
           <div class="space-y-1">
-            <p class="text-xl md:text-2xl font-medium opacity-90">{{ currentWeather.conditionText || 'Despejado' }}</p>
-            <p class="text-sm font-semibold opacity-75">RealFeel® {{ currentWeather.apparentTemperature }}°</p>
+            <p class="text-xl md:text-2xl font-medium opacity-90">{{ (currentWeather.conditionText || '') | translate }}</p>
+            <p class="text-sm font-semibold opacity-75">{{ 'WEATHER.FEELS_LIKE' | translate }} {{ currentWeather.apparentTemperature }}°</p>
           </div>
         </div>
 
@@ -89,21 +88,21 @@
             <!-- Detail 1: Humidity -->
             <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-inner hover:bg-white/30 transition-colors duration-300">
               <i class="bi bi-droplet-fill text-2xl mb-2 opacity-90"></i>
-              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">HUMIDITY</span>
+              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">{{ 'WEATHER_CARD.HUMIDITY' | translate}}</span>
               <span class="text-xl font-bold">{{ currentWeather.relativeHumidity }}%</span>
             </div>
 
             <!-- Detail 2: Wind -->
             <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-inner hover:bg-white/30 transition-colors duration-300">
               <i class="bi text-2xl mb-2 opacity-90" [class]="getWindDirectionIcon(currentWeather.windDirection)"></i>
-              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">WIND KM/H</span>
-              <span class="text-xl font-bold"> {{ currentWeather.windSpeed }} - {{ currentWeather.windGusts }} </span>
+              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">{{ 'WEATHER_CARD.WIND' | translate}} KM/H</span>
+              <span class="text-xl font-bold"> {{ currentWeather.windSpeed }}</span>
             </div>
 
             <!-- Detail 3: Rain Chance (Simulado o real) -->
             <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-inner hover:bg-white/30 transition-colors duration-300">
               <i class="bi bi-umbrella text-2xl mb-2 opacity-90"></i>
-              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">RAIN CHANCE</span>
+              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">{{ 'WEATHER_CARD.RAIN_CHANCE' | translate}}</span>
               <!-- Asume que precipitationProbabilityMax existe en el forecast del día 0 -->
               <span class="text-xl font-bold">{{ forecast?.days?.[0]?.precipitationProbabilityMax || 0 }}%</span>
             </div>
@@ -111,21 +110,21 @@
             <!-- Detail 4: Cloud Cover -->
             <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-inner hover:bg-white/30 transition-colors duration-300">
               <i class="bi bi-cloud text-2xl mb-2 opacity-90"></i>
-              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">CLOUD COVER</span>
+              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">{{ 'WEATHER_CARD.CLOUD_COVER' | translate}}</span>
               <span class="text-xl font-bold">{{ currentWeather.cloudCover }}%</span>
             </div>
 
             <!-- Detail 4: Cloud Cover -->
             <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-inner hover:bg-white/30 transition-colors duration-300">
               <i class="bi bi-sun text-2xl mb-2 opacity-90"></i>
-              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">UV INDEX</span>
+              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">{{ 'WEATHER_CARD.UV_INDEX' | translate}}</span>
               <span class="text-xl font-bold">{{ currentWeather.uvIndex }}</span>
             </div>
 
             <!-- Detail 4: Cloud Cover -->
             <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-inner hover:bg-white/30 transition-colors duration-300">
-              <i class="bi bi-cloud text-2xl mb-2 opacity-90"></i>
-              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">WIND GUSTS</span>
+              <i class="bi bi-wind text-2xl mb-2 opacity-90"></i>
+              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">{{ 'WEATHER_CARD.WIND_GUSTS' | translate}}</span>
               <span class="text-xl font-bold">{{ currentWeather.windGusts }} km/h</span>
             </div>
 
@@ -145,36 +144,32 @@
         <!-- Button 1: Outfit -->
         <button (click)="askAi('outfit')"
                 [disabled]="isAiLoading && activeAiMode === 'outfit'"
-                class="flex-1 bg-white hover:bg-blue-50 text-slate-700 font-semibold py-4 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 border border-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">
-          <span class="text-2xl">🧥</span>
-          <span>Outfit Advisor</span>
+                class="basis-[calc(50%-0.5rem)] md:flex-1 bg-white hover:bg-blue-50 text-slate-700 font-semibold py-4 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 border border-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">          <span class="text-2xl">🧥</span>
+          <span>{{ 'AI_SECTION.OUTFIT' | translate}}</span>
           <div *ngIf="isAiLoading && activeAiMode === 'outfit'" class="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
         </button>
 
         <!-- Button 2: City Guide -->
         <button (click)="askAi('activity')"
                 [disabled]="isAiLoading && activeAiMode === 'activity'"
-                class="flex-1 bg-white hover:bg-blue-50 text-slate-700 font-semibold py-4 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 border border-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">
-          <span class="text-2xl">🚲</span>
-          <span>City Guide</span>
+                class="basis-[calc(50%-0.5rem)] md:flex-1 bg-white hover:bg-blue-50 text-slate-700 font-semibold py-4 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 border border-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">          <span class="text-2xl">🚲</span>
+          <span>{{ 'AI_SECTION.ACTIVITY' | translate}}</span>
           <div *ngIf="isAiLoading && activeAiMode === 'activity'" class="w-4 h-4 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>
         </button>
 
         <!-- Button 3: Wash Clothes -->
         <button (click)="askAi('laundry')"
                 [disabled]="isAiLoading && activeAiMode === 'laundry'"
-                class="flex-1 bg-white hover:bg-blue-50 text-slate-700 font-semibold py-4 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 border border-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">
-          <span class="text-2xl">🧺</span>
-          <span>Wash Clothes</span>
+                class="basis-[calc(50%-0.5rem)] md:flex-1 bg-white hover:bg-blue-50 text-slate-700 font-semibold py-4 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 border border-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">          <span class="text-2xl">🧺</span>
+          <span>{{ 'AI_SECTION.LAUNDRY' | translate}}</span>
           <div *ngIf="isAiLoading && activeAiMode === 'laundry'" class="w-4 h-4 border-2 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
         </button>
 
       <!-- Button 3: Wash Clothes -->
       <button (click)="askAi('drink')"
               [disabled]="isAiLoading && activeAiMode === 'drink'"
-              class="flex-1 bg-white hover:bg-blue-50 text-slate-700 font-semibold py-4 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 border border-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">
-        <span class="text-2xl">🍻</span>
-        <span>Bar Expert</span>
+              class="basis-[calc(50%-0.5rem)] md:flex-1 bg-white hover:bg-blue-50 text-slate-700 font-semibold py-4 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 border border-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">        <span class="text-2xl">🍻</span>
+        <span>{{ 'AI_SECTION.DRINK' | translate}}</span>
         <div *ngIf="isAiLoading && activeAiMode === 'drink'" class="w-4 h-4 border-2 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
       </button>
     </div>
@@ -219,7 +214,6 @@
 
           <div class="text-center">
             <span class="text-slate-800 font-bold text-lg">{{ day.temperatureMax }}°</span>
-            <!-- Note: El pipe date necesita CommonModule/BrowserModule y, si se usa ngModel, FormsModule -->
             <span class="text-slate-400 font-medium text-sm ml-1">{{ day.temperatureMin }}°</span>
           </div>
 
