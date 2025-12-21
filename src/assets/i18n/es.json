@@ -1,14 +1,20 @@
 {
   "APP_TITLE": "Smart Weather",
-  "SEARCH_PLACEHOLDER": "Introduce una ciudad...",
+  "SEARCH_PLACEHOLDER": "Escribe el nombre de una ciudad...",
   "SEARCH_BUTTON": "Buscar",
   "LOADING": "Consultando con el satélite...",
   "ERROR_NOT_FOUND": "Ciudad no encontrada.",
   "ERROR_SERVER": "El servidor está arrancando, intenta de nuevo.",
+  "WEATHER": {
+    "NOW": "AHORA",
+    "RAIN": "Lluvia",
+    "CLOUDY": "Nublado",
+    "CLEAR": "Despejado",
+    "FEELS_LIKE": "Sensación"
+  },
   "WEATHER_CARD": {
-    "HUMIDITY": "Humedad",
-    "WIND": "Viento",
-    "FEELS_LIKE": "Sensación",
+    "HUMIDITY": "HUMEDAD",
+    "WIND": "VIENTO",
     "RAIN_CHANCE": "LLUVIA",
     "CLOUD_COVER": "COBERTURA",
     "UV_INDEX": "INDICE UV",
@@ -22,15 +28,15 @@
     "THU": "JUE",
     "FRI": "VIE",
     "SAT": "SAB",
-    "SUN": "DOM",
+    "SUN": "DOM"
+  },
   "AI_SECTION": {
     "TITLE": "Smart Assistant AI",
     "DISCLAIMER": "Generado por IA",
     "NO_AI": "Lo siento, IA no disponible ahora mismo, intentalo mas tarde",
-    "OUTFIT": "Especialista en Outfits",
+    "OUTFIT": "Estilista",
     "ACTIVITY": "Guia Local",
-    "LAUNDRY": "Lavar la Ropa",
+    "LAUNDRY": "Colada",
     "DRINK": "Experto en Bares"
-  },
-  "WEEKDAYS"
+  }
 }

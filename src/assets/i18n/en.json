@@ -5,10 +5,16 @@
   "LOADING": "Consulting satellite...",
   "ERROR_NOT_FOUND": "City not found.",
   "ERROR_SERVER": "Server is waking up, please try again.",
+  "WEATHER": {
+    "NOW": "NOW",
+    "RAIN": "Rain",
+    "CLOUDY": "Cloudy",
+    "CLEAR": "Clear",
+    "FEELS_LIKE": "Feels Like"
+  },
   "WEATHER_CARD": {
     "HUMIDITY": "HUMIDITY",
     "WIND": "WIND",
-    "FEELS_LIKE": "Feels Like",
     "RAIN_CHANCE": "RAIN CHANCE",
     "CLOUD_COVER": "CLOUD COVER",
     "UV_INDEX": "UV-INDEX",
