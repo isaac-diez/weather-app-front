@@ -128,7 +128,7 @@ export class WeatherComponent {
         this.isAiLoading = false;
       },
       error: (err: any) => {
-        this.aiError = 'La IA no está disponible.';
+        this.aiError = 'AI_SECTION.NO_AI';
         this.isAiLoading = false;
       }
     });
