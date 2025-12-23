@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { WeatherService, CityDTO, CurrentWeatherDTO, ForecastDTO, CityListDTO, GeminiRequest } from '../weather.service';
 import { Observable } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-weather',
@@ -24,7 +25,10 @@ export class WeatherComponent {
   aiError: string | null = null;
   activeAiMode: 'outfit' | 'activity' | 'laundry' | 'drink' | null = null;
 
-  constructor(private weatherService: WeatherService) {}
+  constructor(
+    private weatherService: WeatherService,
+    private translate: TranslateService
+  ) {}
 
   searchCities() {
     if (!this.searchName.trim()) {
@@ -110,24 +114,21 @@ export class WeatherComponent {
     this.aiError = null;
     this.activeAiMode = mode;
 
-    // Se eliminan todas las variables y la lógica de construcción del 'prompt' del frontend.
-    // El backend se encargará de determinar las condiciones climáticas y el texto de la consulta.
-
     const request: GeminiRequest = {
         mode: mode,
         latitude: this.selectedCity.latitude,
         longitude: this.selectedCity.longitude,
-        city: this.selectedCity.name // El backend usa esta información y el 'mode' para construir el prompt.
+        city: this.selectedCity.name,
+        language: this.translate.currentLang || this.translate.defaultLang || 'en'
     };
 
-    // Usar el método correcto del servicio: getAiSuggestion
     this.weatherService.getAiSuggestion(request).subscribe({
       next: (response: string) => {
         this.aiResponse = response;
         this.isAiLoading = false;
       },
       error: (err: any) => {
-        this.aiError = 'La IA no está disponible.';
+        this.aiError = 'AI_SECTION.NO_AI';
         this.isAiLoading = false;
       }
     });

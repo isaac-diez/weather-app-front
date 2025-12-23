@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs'; // Añadido 'of'
-import { map, switchMap } from 'rxjs/operators'; // Añadido 'switchMap'
+import { Observable, of } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { environment } from '../environments/environment';
-import { TranslateService } from '@ngx-translate/core'; // Añadido
+import { TranslateService } from '@ngx-translate/core';
 
 export interface CityDTO {
 name: string;
@@ -50,6 +50,7 @@ mode: 'outfit' | 'activity' | 'laundry' | 'drink' | string;
 latitude: number;
 longitude: number;
 city: string;
+language: string;
 }
 
 @Injectable({
