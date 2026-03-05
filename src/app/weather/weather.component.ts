@@ -88,8 +88,14 @@ export class WeatherComponent {
     });
   }
 
+  isToday(dateStr: string): boolean {
+    const today = new Date().getDate();
+    const date = new Date(dateStr).getDate();
+    return today === date;
+  }
+
   getWeatherIconClass(isDay: number, precip: number, cloud: number): string {
-    if (precip > 0.5) return 'bi-cloud-drizzle-fill';
+    if (precip > 0.1) return 'bi-cloud-drizzle-fill';
     if (cloud > 50) return 'bi-clouds-fill';
     if (isDay === 1) return 'bi-sun-fill';
     return 'bi-moon-stars-fill';
