@@ -40,9 +40,18 @@ temperatureMin: number;
 precipitationProbabilityMax: number;
 }
 
+export interface ForecastHourDTO {
+hour: string;
+temperature_2m: number;
+weather_code: number;
+precipitation_probability: number;
+rain: number;
+}
+
 export interface ForecastDTO {
 city: string;
 days: ForecastDayDTO[];
+hours: ForecastHourDTO[];
 }
 
 export interface GeminiRequest {
