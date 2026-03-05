@@ -21,7 +21,7 @@
     "WIND_GUSTS": "RACHAS"
   },
   "7_DAY_FORECAST": {
-    "7_DAY_TITLE": "PREVISION 7 DIAS",
+    "TITLE": "Previsión semanal",
     "MON": "LUN",
     "TUE": "MAR",
     "WED": "MIE",
@@ -30,8 +30,13 @@
     "SAT": "SAB",
     "SUN": "DOM"
   },
+  "24_HOUR_FORECAST": {
+    "TITLE": "Previsión horaria",
+    "TODAY": "HOY",
+    "TOMORROW": "MAÑANA"
+  },
   "AI_SECTION": {
-    "TITLE": "Smart Assistant AI",
+    "TITLE": "Asistente Inteligente con IA",
     "DISCLAIMER": "Generado por IA",
     "NO_AI": "La IA no disponible ahora mismo, intentalo mas tarde",
     "OUTFIT": "Estilista",

@@ -21,7 +21,7 @@
     "WIND_GUSTS": "WIND GUSTS"
   },
   "7_DAY_FORECAST": {
-    "7_DAY_TITLE": "7-DAY FORECAST",
+    "TITLE": "7-day forecast",
     "MON": "MON",
     "TUE": "TUE",
     "WED": "WED",
@@ -29,6 +29,11 @@
     "FRI": "FRI",
     "SAT": "SAT",
     "SUN": "SUN"
+  },
+  "24_HOUR_FORECAST": {
+    "TITLE": "24-hour forecast",
+    "TODAY": "TODAY",
+    "TOMORROW": "TOMORROW"
   },
   "AI_SECTION": {
     "TITLE": "AI Smart Assistant",
