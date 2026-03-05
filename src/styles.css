@@ -16,6 +16,10 @@
     line-height: 1;
 }
 
+.my-2 {
+    margin-bottom: 0rem !important;
+}
+
 /* Ocultar scrollbar para navegadores basados en Webkit (Chrome, Safari) */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
