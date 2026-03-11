@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { WeatherService, CityDTO, CurrentWeatherDTO, ForecastDTO, CityListDTO, GeminiRequest } from '../weather.service';
 import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
@@ -8,7 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './weather.component.html',
   styles: []
 })
-export class WeatherComponent {
+export class WeatherComponent implements OnInit{
 
   searchName = '';
   cityList: CityDTO[] = [];
@@ -29,6 +29,18 @@ export class WeatherComponent {
     private weatherService: WeatherService,
     private translate: TranslateService
   ) {}
+
+  ngOnInit() {
+    const saved = localStorage.getItem('lastCity');
+    if (saved) {
+      try {
+        const city: CityDTO = JSON.parse(saved);
+        this.selectCity(city);
+      } catch (e) {
+        console.error("Error al recuperar persistencia", e);
+      }
+    }
+  }
 
   searchCities() {
     if (!this.searchName.trim()) {
@@ -55,7 +67,14 @@ export class WeatherComponent {
     this.searchName = `${city.name}, ${city.country}`;
     this.cityList = [];
     this.showDropdown = false;
+
+    localStorage.setItem('lastCity', JSON.stringify(city));
+
     this.loadWeather();
+  }
+
+  onInputFocus() {
+    this.searchName = '';
   }
 
   loadWeather() {
