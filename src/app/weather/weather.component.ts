@@ -99,34 +99,19 @@ private searchSubscription?: Subscription;
   }
 
   loadWeather() {
-    if (!this.selectedCity) return;
+  if (!this.selectedCity) return;
 
-    this.error = undefined;
-    this.currentWeather = undefined;
-    this.forecast = undefined;
-    this.aiResponse = null;
-    this.activeAiMode = null;
-
-    this.weatherService.getCurrentWeather(this.selectedCity).subscribe({
-      next: (data: CurrentWeatherDTO) => {
-        this.currentWeather = data;
-      },
-      error: (err: any) => {
-        console.error(err);
-        this.error = 'No se pudo cargar el tiempo actual.';
-      }
-    });
-
-    this.weatherService.getForecast(this.selectedCity).subscribe({
-      next: (data: ForecastDTO) => {
-        this.forecast = data;
-      },
-      error: (err: any) => {
-        console.error(err);
-        this.error = 'No se pudo cargar el pronóstico.';
-      }
-    });
-  }
+  // Una sola llamada para traerlo todo
+  this.weatherService.getFullWeather(this.selectedCity).subscribe({
+    next: (data: FullWeatherDTO) => {
+      this.currentWeather = data.current;
+      this.forecast = data.forecast;
+    },
+    error: (err) => {
+      this.error = 'Error al cargar los datos del tiempo.';
+    }
+  });
+}
 
   isToday(dateStr: string): boolean {
     const today = new Date().getDate();
