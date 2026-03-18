@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { WeatherService, CityDTO, CurrentWeatherDTO, ForecastDTO, CityListDTO, GeminiRequest } from '../weather.service';
+import { WeatherService, CityDTO, FullWeatherDTO, CurrentWeatherDTO, ForecastDTO, CityListDTO, GeminiRequest } from '../weather.service';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';

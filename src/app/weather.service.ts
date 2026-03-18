@@ -62,6 +62,11 @@ city: string;
 language: string;
 }
 
+export interface FullWeatherDTO {
+current: CurrentWeatherDTO;
+forecast: ForecastDTO;
+}
+
 @Injectable({
 providedIn: 'root'
 })
@@ -73,6 +78,10 @@ constructor(private http: HttpClient, private translate: TranslateService) { }
 
   getCities(name: string): Observable<CityListDTO> {
     return this.http.get<CityListDTO>(`${this.baseUrl}/cities?name=${name}`);
+  }
+
+  getFullWeather(city: CityDTO): Observable<FullWeatherDTO> {
+    return this.http.post<FullWeatherDTO>(`${this.baseUrl}/full`, city);
   }
 
   getCurrentWeather(city: CityDTO): Observable<CurrentWeatherDTO> {
