@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { WeatherService, CityDTO, CurrentWeatherDTO, ForecastDTO, CityListDTO, GeminiRequest } from '../weather.service';
-import { Observable } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -8,7 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './weather.component.html',
   styles: []
 })
-export class WeatherComponent implements OnInit{
+export class WeatherComponent implements OnInit, OnDestroy {
 
   searchName = '';
   cityList: CityDTO[] = [];
@@ -25,10 +26,21 @@ export class WeatherComponent implements OnInit{
   aiError: string | null = null;
   activeAiMode: 'outfit' | 'activity' | 'laundry' | 'drink' | null = null;
 
+private searchSubject = new Subject<string>();
+private searchSubscription?: Subscription;
+
   constructor(
     private weatherService: WeatherService,
     private translate: TranslateService
-  ) {}
+  ) {
+
+    this.searchSubscription = this.searchSubject.pipe(
+      debounceTime(400),
+      distinctUntilChanged()
+    ).subscribe(city => {
+      this._executeSearch(city);
+    });
+  }
 
   ngOnInit() {
     const saved = localStorage.getItem('lastCity');
@@ -42,8 +54,17 @@ export class WeatherComponent implements OnInit{
     }
   }
 
+  ngOnDestroy() {
+    this.searchSubscription?.unsubscribe();
+  }
+
   searchCities() {
-    if (!this.searchName.trim()) {
+    this.searchSubject.next(this.searchName);
+    }
+
+  private _executeSearch(name: string) {
+    const term = name.trim();
+    if (term.length < 3) {
       this.cityList = [];
       this.showDropdown = false;
       return;
