@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { WeatherService, CityDTO, FullWeatherDTO, CurrentWeatherDTO, ForecastDTO, CityListDTO, GeminiRequest } from '../weather.service';
+import { WeatherService, CityDTO, FullWeatherDTO, CurrentWeatherDTO, ForecastDTO, CityListDTO, GeminiRequest, SolarSummaryDTO } from '../weather.service';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,6 +18,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
 
   currentWeather?: CurrentWeatherDTO;
   forecast?: ForecastDTO;
+  solarSummary?: SolarSummaryDTO;
   error?: string;
 
   // AI State
@@ -26,8 +27,10 @@ export class WeatherComponent implements OnInit, OnDestroy {
   aiError: string | null = null;
   activeAiMode: 'outfit' | 'activity' | 'laundry' | 'drink' | null = null;
 
-private searchSubject = new Subject<string>();
-private searchSubscription?: Subscription;
+  private searchSubject = new Subject<string>();
+  private searchSubscription?: Subscription;
+
+  viewMode: 'general' | 'solar' | 'air' = 'general';
 
   constructor(
     private weatherService: WeatherService,
@@ -101,17 +104,25 @@ private searchSubscription?: Subscription;
   loadWeather() {
   if (!this.selectedCity) return;
 
-  // Una sola llamada para traerlo todo
   this.weatherService.getFullWeather(this.selectedCity).subscribe({
     next: (data: FullWeatherDTO) => {
       this.currentWeather = data.current;
       this.forecast = data.forecast;
+      this.solarSummary = data.solarSummary;
     },
     error: (err) => {
       this.error = 'Error al cargar los datos del tiempo.';
     }
   });
 }
+
+  getUvColorClass(uv: number): string {
+    if (uv <= 2) return 'text-green-500';
+    if (uv <= 5) return 'text-yellow-500';
+    if (uv <= 7) return 'text-orange-500';
+    if (uv <= 10) return 'text-red-500';
+    return 'text-purple-600';
+  }
 
   isToday(dateStr: string): boolean {
     const today = new Date().getDate();
