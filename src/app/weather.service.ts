@@ -17,6 +17,39 @@ export interface CityListDTO {
 cities: CityDTO[];
 }
 
+export interface ForecastDayDTO {
+date: string;
+temperatureMax: number;
+temperatureMin: number;
+precipitationProbabilityMax: number;
+uvIndexMax: number;
+sunshineDuration: number;
+}
+
+export interface ForecastHourDTO {
+hour: string;
+temperature_2m: number;
+weather_code: number;
+precipitation_probability: number;
+rain: number;
+uv_index: number;
+shortwave_radiation: number;
+}
+
+export interface ForecastDTO {
+days: ForecastDayDTO[];
+hours: ForecastHourDTO[];
+}
+
+export interface SolarSummaryDTO {
+maxUvIndexToday: number;
+peakUvTime: string;
+sunshineHours: string;
+daylightHours: string;
+riskLevel: string;
+recommendation: string;
+}
+
 export interface CurrentWeatherDTO {
 city: string;
 temperature: number;
@@ -33,25 +66,10 @@ conditionText?: string;
 observationTime: string;
 }
 
-export interface ForecastDayDTO {
-date: string;
-temperatureMax: number;
-temperatureMin: number;
-precipitationProbabilityMax: number;
-}
-
-export interface ForecastHourDTO {
-hour: string;
-temperature_2m: number;
-weather_code: number;
-precipitation_probability: number;
-rain: number;
-}
-
-export interface ForecastDTO {
-city: string;
-days: ForecastDayDTO[];
-hours: ForecastHourDTO[];
+export interface FullWeatherDTO {
+current: CurrentWeatherDTO;
+forecast: ForecastDTO;
+solarSummary: SolarSummaryDTO;
 }
 
 export interface GeminiRequest {
@@ -60,11 +78,6 @@ latitude: number;
 longitude: number;
 city: string;
 language: string;
-}
-
-export interface FullWeatherDTO {
-current: CurrentWeatherDTO;
-forecast: ForecastDTO;
 }
 
 @Injectable({
