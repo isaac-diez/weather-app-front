@@ -42,12 +42,18 @@ hours: ForecastHourDTO[];
 }
 
 export interface SolarSummaryDTO {
+uvIndexHourly: number;
 maxUvIndexToday: number;
 peakUvTime: string;
 sunshineHours: string;
 daylightHours: string;
 riskLevel: string;
 recommendation: string;
+shortwaveRadiation: number;
+sunrise: string;
+sunset: string;
+dayProgressPercent: number;
+isNight: boolean;
 }
 
 export interface CurrentWeatherDTO {
