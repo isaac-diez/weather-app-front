@@ -297,12 +297,17 @@
             <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
               <div class="text-center md:text-left">
                 <h4 class="text-slate-400 font-bold uppercase text-xs tracking-widest mb-2">Estado Solar</h4>
-                <div class="flex items-center gap-3 mb-3">
-                  <span class="text-5xl font-black" [ngClass]="getUvColorClass(solarSummary.uvIndexHourly)">{{ solarSummary.uvIndexHourly }}</span>
-                  <div class="flex flex-col">
+                <div class="flex items-center justify-center md:justify-start gap-3 mb-3">
+
+                  <span class="text-5xl font-black text-green-500" [ngClass]="getUvColorClass(solarSummary.uvIndexHourly)">
+                    {{ solarSummary.uvIndexHourly }}
+                  </span>
+
+                  <div class="flex flex-col text-left">
                     <span class="font-bold text-yellow-600">UV Máximo {{ solarSummary.maxUvIndexToday }}</span>
-                    <span class="text-sm text-slate-400">a las {{ solarSummary.peakUvTime | date:'HH:mm' }}</span>
+                    <span class="text-sm text-slate-400">a las {{ solarSummary.peakUvTime | date: 'HH:mm' }}</span>
                   </div>
+
                 </div>
                 <p class="text-slate-600 font-medium max-w-md">{{ solarSummary.recommendation }}</p>
               </div>
@@ -342,10 +347,6 @@
                   <span class="block text-lg font-extrabold text-slate-800">{{ solarSummary.sunshineHours }}</span>
                 </div>
 
-
-
-
-
                 <div class="bg-sky-50 p-4 rounded-3xl text-center border border-sky-100 shadow-sm">
                   <i class="bi bi-cloud-sun-fill text-sky-500 text-2xl"></i>
                   <span class="block text-[10px] font-bold text-sky-700 uppercase mt-1 tracking-tight">Día Total</span>
@@ -355,9 +356,9 @@
             </div>
           </div>
 
-          <div class="relative w-full max-w-lg mx-auto h-56 mb-10 mt-6 border-b border-dashed border-slate-200">
+          <div class="relative w-full max-w-lg mx-auto aspect-[2/1] mb-10 mt-6 border-b border-dashed border-slate-200">
 
-            <svg viewBox="0 0 100 50" class="w-full h-full overflow-visible" preserveAspectRatio="none">
+            <svg viewBox="0 0 100 50" class="w-full h-full overflow-visible" preserveAspectRatio="xMidYMax meet">
               <path d="M 0 50 A 50 50 0 0 1 100 50"
                     fill="none"
                     stroke="#e2e8f0"
@@ -390,7 +391,6 @@
               <i class="bi bi-sunset text-purple-400 text-sm"></i>
               <span class="block text-xs font-bold text-slate-500">{{ solarSummary?.sunset | date:'HH:mm' }}</span>
             </div>
-
           </div>
 
           <h3 class="text-xl font-bold text-slate-800 mb-5">Evolución Radiación UV</h3>
