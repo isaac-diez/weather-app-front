@@ -52,7 +52,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
         const city: CityDTO = JSON.parse(saved);
         this.selectCity(city);
       } catch (e) {
-        console.error("Error al recuperar persistencia", e);
+        console.error("Error retrieving last searched city", e);
       }
     }
   }
@@ -123,6 +123,35 @@ export class WeatherComponent implements OnInit, OnDestroy {
     if (uv <= 10) return 'text-red-500';
     return 'text-purple-600';
   }
+
+  getUvBarColorClass(uv: number): string {
+    if (uv <= 2) return 'bg-green-400';
+    if (uv <= 5) return 'bg-yellow-400';
+    if (uv <= 7) return 'bg-orange-400';
+    if (uv <= 10) return 'bg-red-400';
+    return 'bg-purple-400';
+  }
+
+getSunPosition(percent: number | undefined): { x: number; y: number } {
+  const safePercent = percent ?? 0;
+
+  // Ángulo: 180 grados (0%) a 0 grados (100%)
+  const angleRad = Math.PI * (1 - safePercent / 100);
+
+  // Ahora el radio es 50 (la mitad de 100)
+  const radius = 50;
+
+  // El centro horizontal es 50
+  const centerX = 50;
+
+  // El centro vertical es 50 (la base del SVG)
+  const centerY = 50;
+
+  return {
+    x: centerX + radius * Math.cos(angleRad),
+    y: centerY - radius * Math.sin(angleRad)
+  };
+}
 
   isToday(dateStr: string): boolean {
     const today = new Date().getDate();
