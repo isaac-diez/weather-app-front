@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { WeatherService, CityDTO, FullWeatherDTO, CurrentWeatherDTO, ForecastDTO, CityListDTO, GeminiRequest } from '../weather.service';
+import { WeatherService, CityDTO, FullWeatherDTO, CurrentWeatherDTO, ForecastDTO, CityListDTO, GeminiRequest, SolarSummaryDTO } from '../weather.service';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
@@ -18,6 +18,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
 
   currentWeather?: CurrentWeatherDTO;
   forecast?: ForecastDTO;
+  solarSummary?: SolarSummaryDTO;
   error?: string;
 
   // AI State
@@ -26,8 +27,10 @@ export class WeatherComponent implements OnInit, OnDestroy {
   aiError: string | null = null;
   activeAiMode: 'outfit' | 'activity' | 'laundry' | 'drink' | null = null;
 
-private searchSubject = new Subject<string>();
-private searchSubscription?: Subscription;
+  private searchSubject = new Subject<string>();
+  private searchSubscription?: Subscription;
+
+  viewMode: 'general' | 'solar' | 'air' = 'general';
 
   constructor(
     private weatherService: WeatherService,
@@ -49,7 +52,7 @@ private searchSubscription?: Subscription;
         const city: CityDTO = JSON.parse(saved);
         this.selectCity(city);
       } catch (e) {
-        console.error("Error al recuperar persistencia", e);
+        console.error("Error retrieving last searched city", e);
       }
     }
   }
@@ -101,16 +104,53 @@ private searchSubscription?: Subscription;
   loadWeather() {
   if (!this.selectedCity) return;
 
-  // Una sola llamada para traerlo todo
   this.weatherService.getFullWeather(this.selectedCity).subscribe({
     next: (data: FullWeatherDTO) => {
       this.currentWeather = data.current;
       this.forecast = data.forecast;
+      this.solarSummary = data.solarSummary;
     },
     error: (err) => {
       this.error = 'Error al cargar los datos del tiempo.';
     }
   });
+}
+
+  getUvColorClass(uv: number): string {
+    if (uv <= 2) return 'text-green-500';
+    if (uv <= 5) return 'text-yellow-500';
+    if (uv <= 7) return 'text-orange-500';
+    if (uv <= 10) return 'text-red-500';
+    return 'text-purple-600';
+  }
+
+  getUvBarColorClass(uv: number): string {
+    if (uv <= 2) return 'bg-green-400';
+    if (uv <= 5) return 'bg-yellow-400';
+    if (uv <= 7) return 'bg-orange-400';
+    if (uv <= 10) return 'bg-red-400';
+    return 'bg-purple-400';
+  }
+
+getSunPosition(percent: number | undefined): { x: number; y: number } {
+  const safePercent = percent ?? 0;
+
+  // Ángulo: 180 grados (0%) a 0 grados (100%)
+  const angleRad = Math.PI * (1 - safePercent / 100);
+
+  // Ahora el radio es 50 (la mitad de 100)
+  const radius = 50;
+
+  // El centro horizontal es 50
+  const centerX = 50;
+
+  // El centro vertical es 50 (la base del SVG)
+  const centerY = 50;
+
+  return {
+    x: centerX + radius * Math.cos(angleRad),
+    y: centerY - radius * Math.sin(angleRad)
+  };
 }
 
   isToday(dateStr: string): boolean {
