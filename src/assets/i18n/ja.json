@@ -1,0 +1,84 @@
+{
+  "APP_TITLE": "Smart Weather",
+  "SEARCH_PLACEHOLDER": "都市名を入力 (例: 東京)...",
+  "SEARCH_BUTTON": "検索",
+  "LOADING": "衛星に問い合わせ中...",
+  "ERROR_NOT_FOUND": "都市が見つかりません。",
+  "ERROR_SERVER": "サーバーを起動中。後でやり直してください。",
+  "VIEW": {
+    "WEATHER": "天気",
+    "SOLAR": "ソーラー",
+    "AIR": "空気の質"
+  },
+  "WEATHER": {
+    "NOW": "現在",
+    "RAIN": "雨",
+    "CLOUDY": "曇り",
+    "CLEAR": "快晴",
+    "FEELS_LIKE": "体感温度"
+  },
+  "SOLAR": {
+    "STATE": "太陽データ",
+    "UV_MAX": "最大UV",
+    "AT": "時刻: "
+  },
+  "WEATHER_CARD": {
+    "HUMIDITY": "湿度",
+    "WIND": "風速",
+    "RAIN_CHANCE": "降水確率",
+    "CLOUD_COVER": "雲量",
+    "UV_INDEX": "UV指数",
+    "WIND_GUSTS": "最大風速"
+  },
+  "SOLAR_CARD": {
+    "RISK": "UVリスク",
+    "RADIATION": "放射量",
+    "SUNRISE": "日の出",
+    "SUNSET": "日の入り",
+    "SUNSHINE_HOURS": "日照時間",
+    "DAYLIGHT_HOURS": "可照時間",
+    "ADVICE": "アドバイス"
+  },
+  "7_DAY_FORECAST": {
+    "TITLE": "週間予報",
+    "MON": "月",
+    "TUE": "火",
+    "WED": "水",
+    "THU": "木",
+    "FRI": "金",
+    "SAT": "土",
+    "SUN": "日"
+  },
+  "24_HOUR_FORECAST": {
+    "TITLE_WEATHER": "24時間予報",
+    "TITLE_SUN": "UV指数予報",
+    "TODAY": "今日",
+    "TOMORROW": "明日",
+    "UV_INDEX": "UV指数"
+  },
+  "AI_SECTION": {
+    "TITLE": "AIアシスタント",
+    "DISCLAIMER": "AIによって生成されました。この情報を確認してください。",
+    "NO_AI": "AIを利用できません。後ほどお試しください。",
+    "OUTFIT": "服装アドバイス",
+    "ACTIVITY": "観光ガイド",
+    "LAUNDRY": "洗濯",
+    "DRINK": "バー・エキスパート",
+    "SUN": "紫外線対策",
+    "ENERGY": "太陽光発電"
+  },
+  "SOLAR_ADVICE": {
+    "NIGHT": "夜間です。直射日光のリスクはありませんが、条件によりUVの影響が出る場合があります。",
+    "LOW": "紫外線は弱いです。対策は不要です。",
+    "MODERATE": "紫外線は中程度です。日焼け止めの使用をお勧めします。",
+    "HIGH": "紫外線が強いです。日焼け止めを使い、長時間の外出を避けてください。",
+    "EXTREME": "極めて強い紫外線です。外出を控え、出る際は万全の対策を。"
+  },
+  "RISK": {
+    "NIGHT": "最小",
+    "LOW": "低い",
+    "MODERATE": "中程度",
+    "HIGH": "高い",
+    "EXTREME": "極めて高い"
+  }
+}
