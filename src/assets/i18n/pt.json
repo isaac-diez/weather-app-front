@@ -1,0 +1,84 @@
+{
+  "APP_TITLE": "Smart Weather",
+  "SEARCH_PLACEHOLDER": "Digite uma cidade (ex: Lisboa)...",
+  "SEARCH_BUTTON": "Pesquisar",
+  "LOADING": "Consultando satélite...",
+  "ERROR_NOT_FOUND": "Cidade não encontrada.",
+  "ERROR_SERVER": "O servidor está a iniciar, tente novamente.",
+  "VIEW": {
+    "WEATHER": "Tempo",
+    "SOLAR": "Solar",
+    "AIR": "Qualidade do Ar"
+  },
+  "WEATHER": {
+    "NOW": "AGORA",
+    "RAIN": "Chuva",
+    "CLOUDY": "Nublado",
+    "CLEAR": "Limpo",
+    "FEELS_LIKE": "Sensação"
+  },
+  "SOLAR": {
+    "STATE": "DADOS SOLARES",
+    "UV_MAX": "UV Máx",
+    "AT": "às "
+  },
+  "WEATHER_CARD": {
+    "HUMIDITY": "HUMIDADE",
+    "WIND": "VENTO",
+    "RAIN_CHANCE": "PROB. CHUVA",
+    "CLOUD_COVER": "NEBULOSIDADE",
+    "UV_INDEX": "ÍNDICE UV",
+    "WIND_GUSTS": "RAJADAS"
+  },
+  "SOLAR_CARD": {
+    "RISK": "RISCO UV",
+    "RADIATION": "RADIAÇÃO",
+    "SUNRISE": "NASSER",
+    "SUNSET": "POR DO SOL",
+    "SUNSHINE_HOURS": "SOL",
+    "DAYLIGHT_HOURS": "LUZ DO DIA",
+    "ADVICE": "CONSELHO"
+  },
+  "7_DAY_FORECAST": {
+    "TITLE": "Previsão 7 dias",
+    "MON": "SEG",
+    "TUE": "TER",
+    "WED": "QUA",
+    "THU": "QUI",
+    "FRI": "SEX",
+    "SAT": "SÁB",
+    "SUN": "DOM"
+  },
+  "24_HOUR_FORECAST": {
+    "TITLE_WEATHER": "Previsão 24 horas",
+    "TITLE_SUN": "Previsão Índice UV",
+    "TODAY": "HOJE",
+    "TOMORROW": "AMANHÃ",
+    "UV_INDEX": "ÍNDICE UV"
+  },
+  "AI_SECTION": {
+    "TITLE": "Assistente Inteligente IA",
+    "DISCLAIMER": "Gerado por IA. Lembre-se de verificar informações importantes.",
+    "NO_AI": "IA indisponível no momento. Tente mais tarde.",
+    "OUTFIT": "Dicas de Roupa",
+    "ACTIVITY": "Guia da Cidade",
+    "LAUNDRY": "Lavandaria",
+    "DRINK": "Bar Expert",
+    "SUN": "Proteção",
+    "ENERGY": "Energia Solar"
+  },
+  "SOLAR_ADVICE": {
+    "NIGHT": "É noite; não há risco direto, mas os UV podem atuar sob certas condições.",
+    "LOW": "Radiação baixa; proteção desnecessária.",
+    "MODERATE": "Radiação moderada; recomenda-se protetor solar.",
+    "HIGH": "Radiação alta; use protetor e evite exposição prolongada.",
+    "EXTREME": "Radiação extrema; evite sair e use proteção máxima."
+  },
+  "RISK": {
+    "NIGHT": "Mínimo",
+    "LOW": "Baixo",
+    "MODERATE": "Moderado",
+    "HIGH": "Alto",
+    "EXTREME": "Extremo"
+  }
+}
