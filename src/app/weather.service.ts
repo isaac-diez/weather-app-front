@@ -79,7 +79,7 @@ solarSummary: SolarSummaryDTO;
 }
 
 export interface GeminiRequest {
-mode: 'outfit' | 'activity' | 'laundry' | 'drink' | string;
+mode: 'outfit' | 'activity' | 'laundry' | 'drink' | 'sun' | 'energy' | string;
 latitude: number;
 longitude: number;
 city: string;

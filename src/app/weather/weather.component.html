@@ -15,16 +15,22 @@
     <!-- SEARCH BAR (Pill Shape) -->
     <div class="relative max-w-lg mx-auto mb-10 z-50">
       <div class="relative">
-        <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-          <i class="bi bi-search text-slate-400 text-lg"></i>
-        </span>
+    <span class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+      <i class="bi bi-search text-slate-400 text-lg"></i>
+    </span>
+
         <input type="text"
-               class="w-full py-3.5 pl-12 pr-4 text-slate-700 bg-white rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-slate-400 transition-all"
+               class="w-full py-3.5 pl-12 pr-12 text-slate-700 bg-white rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-400 placeholder-slate-400 transition-all"
                [(ngModel)]="searchName"
                (input)="searchCities()"
                (focus)="onInputFocus()"
                [placeholder]="'SEARCH_PLACEHOLDER' | translate"
                autocomplete="off">
+
+        <div *ngIf="isCitiesLoading || isWeatherLoading"
+             class="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+          <div class="w-5 h-5 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
       </div>
 
       <!-- Autocomplete Dropdown -->
@@ -40,14 +46,14 @@
     </div>
 
     <div *ngIf="currentWeather" class="flex justify-center gap-3 mb-8 animate-fade-in">
-      <button (click)="viewMode = 'general'"
+      <button (click)="changeView('general')"
               [class]="viewMode === 'general' ? 'bg-blue-600 text-white shadow-blue-200' : 'bg-white text-slate-500 hover:bg-slate-50'"
               class="flex items-center gap-2 px-6 py-2.5 rounded-full font-bold shadow-lg transition-all duration-300 border border-transparent">
         <i class="bi bi-cloud-sun-fill"></i>
         <span>Clima</span>
       </button>
 
-      <button (click)="viewMode = 'solar'"
+      <button (click)="changeView('solar')"
               [class]="viewMode === 'solar' ? 'bg-yellow-500 text-white shadow-yellow-200' : 'bg-white text-slate-500 hover:bg-slate-50'"
               class="flex items-center gap-2 px-6 py-2.5 rounded-full font-bold shadow-lg transition-all duration-300 border border-transparent">
         <i class="bi bi-sun-fill"></i>
@@ -198,12 +204,12 @@
       </div>
 
       <!-- AI Response Card -->
-      <div *ngIf="viewMode === 'general' && aiResponse" class="bg-white rounded-3xl p-6 shadow-xl border-l-8 border-blue-500 relative overflow-hidden transition-all duration-500 ease-in-out">
+      <div *ngIf="viewMode === 'general' && aiResponse" class="bg-white rounded-3xl p-6 shadow-xl border-l-8 border-blue-500 relative overflow-hidden transition-all duration-500 ease-in-out animate-fade-in-up">
         <div class="absolute top-0 right-0 p-4 opacity-5 text-blue-500">
           <i class="bi bi-chat-quote-fill text-6xl"></i>
         </div>
         <h6 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">
-          {{ activeAiMode === 'outfit' ? 'STYLE RECOMMENDATION' : activeAiMode === 'laundry' ? 'LAUNDRY ADVICE' : 'LOCAL SUGGESTIONS' }}
+          {{ activeAiMode === 'outfit' ? 'STYLE RECOMMENDATION' : activeAiMode === 'laundry' ? 'LAUNDRY ADVICE' : activeAiMode === 'activity' ? 'LOCAL SUGGESTIONS' : 'DRINK IN STYLE' }}
         </h6>
         <p class="text-lg text-slate-700 leading-relaxed font-medium whitespace-pre-line">{{ aiResponse }}</p>
       </div>
@@ -354,6 +360,46 @@
                 </div>
               </div>
             </div>
+          </div>
+
+
+          <!-- AI SOLAR ASSISTANT SECTION-->
+          <div *ngIf="viewMode === 'solar' && forecast" class="mb-12 animate-fade-in-up">
+            <h3 class="text-xl font-bold text-slate-800 mb-5 flex items-center gap-2">
+              {{ 'AI_SECTION.TITLE' | translate}}
+            </h3>
+
+            <div class="flex flex-wrap gap-4 justify-center md:justify-start mb-6">
+              <!-- Button 1: Sun -->
+              <button (click)="askAi('sun')"
+                      [disabled]="isAiLoading && activeAiMode === 'sun'"
+                      class="basis-[calc(50%-0.5rem)] md:flex-1 bg-white hover:bg-blue-50 text-slate-700 font-semibold py-4 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 border border-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">          <span class="text-2xl">☀️</span>
+                <span>{{ 'AI_SECTION.SUN' | translate}}</span>
+                <div *ngIf="isAiLoading && activeAiMode === 'sun'" class="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+              </button>
+
+              <!-- Button 2: Energy -->
+              <button (click)="askAi('energy')"
+                      [disabled]="isAiLoading && activeAiMode === 'energy'"
+                      class="basis-[calc(50%-0.5rem)] md:flex-1 bg-white hover:bg-blue-50 text-slate-700 font-semibold py-4 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 border border-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">          <span class="text-2xl">⚡</span>
+                <span>{{ 'AI_SECTION.ENERGY' | translate}}</span>
+                <div *ngIf="isAiLoading && activeAiMode === 'energy'" class="w-4 h-4 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+              </button>
+
+            </div>
+
+            <!-- AI Response Card -->
+            <div *ngIf="viewMode === 'solar' && aiResponse" class="bg-white rounded-3xl p-6 shadow-xl border-l-8 border-blue-500 relative overflow-hidden transition-all duration-500 ease-in-out">
+              <div class="absolute top-0 right-0 p-4 opacity-5 text-blue-500">
+                <i class="bi bi-chat-quote-fill text-6xl"></i>
+              </div>
+              <h6 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">
+                {{ activeAiMode === 'sun' ? 'SUN PROTECTION RECOMMENDATION' : activeAiMode === 'energy' ? 'MAXIMIZE YOUR SOLAR PRODUCTION' : '' }}
+              </h6>
+              <p class="text-lg text-slate-700 leading-relaxed font-medium whitespace-pre-line">{{ aiResponse }}</p>
+            </div>
+
+            <p *ngIf="aiError" class="text-red-500 text-sm mt-3 font-medium text-center bg-red-50 p-2 rounded-lg">{{ aiError }}</p>
           </div>
 
           <div class="relative w-full max-w-lg mx-auto aspect-[2/1] mb-10 mt-6 border-b border-dashed border-slate-200">
