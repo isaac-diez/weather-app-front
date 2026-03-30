@@ -1,0 +1,84 @@
+{
+  "APP_TITLE": "Smart Weather",
+  "SEARCH_PLACEHOLDER": "Stadt eingeben (z. B. Berlin)...",
+  "SEARCH_BUTTON": "Suchen",
+  "LOADING": "Satellit wird abgefragt...",
+  "ERROR_NOT_FOUND": "Stadt nicht gefunden.",
+  "ERROR_SERVER": "Server startet neu, bitte versuchen Sie es später.",
+  "VIEW": {
+    "WEATHER": "Wetter",
+    "SOLAR": "Solar",
+    "AIR": "Luftqualität"
+  },
+  "WEATHER": {
+    "NOW": "z.Zt.",
+    "RAIN": "Regen",
+    "CLOUDY": "Bewölkt",
+    "CLEAR": "Klar",
+    "FEELS_LIKE": "Gefühlt"
+  },
+  "SOLAR": {
+    "STATE": "SOLARDATEN",
+    "UV_MAX": "UV Max",
+    "AT": "um "
+  },
+  "WEATHER_CARD": {
+    "HUMIDITY": "FEUCHTIGKEIT",
+    "WIND": "WIND",
+    "RAIN_CHANCE": "REGENCHANCE",
+    "CLOUD_COVER": "BEWÖLKUNG",
+    "UV_INDEX": "UV-INDEX",
+    "WIND_GUSTS": "BÖEN"
+  },
+  "SOLAR_CARD": {
+    "RISK": "UV-RISIKO",
+    "RADIATION": "STRAHLUNG",
+    "SUNRISE": "AUFGANG",
+    "SUNSET": "UNTERGANG",
+    "SUNSHINE_HOURS": "SONNE",
+    "DAYLIGHT_HOURS": "TAGESLICHT",
+    "ADVICE": "HINWEIS"
+  },
+  "7_DAY_FORECAST": {
+    "TITLE": "7-Tage-Vorhersage",
+    "MON": "MO",
+    "TUE": "DI",
+    "WED": "MI",
+    "THU": "DO",
+    "FRI": "FR",
+    "SAT": "SA",
+    "SUN": "SO"
+  },
+  "24_HOUR_FORECAST": {
+    "TITLE_WEATHER": "24-Stunden-Vorhersage",
+    "TITLE_SUN": "UV-Index-Vorhersage",
+    "TODAY": "HEUTE",
+    "TOMORROW": "MORGEN",
+    "UV_INDEX": "UV-INDEX"
+  },
+  "AI_SECTION": {
+    "TITLE": "Smarter KI-Assistent",
+    "DISCLAIMER": "Generiert von KI. Bitte überprüfen Sie diese Informationen.",
+    "NO_AI": "KI derzeit nicht verfügbar. Später erneut versuchen.",
+    "OUTFIT": "Outfit-Berater",
+    "ACTIVITY": "Stadtführer",
+    "LAUNDRY": "Wäsche",
+    "DRINK": "Bar-Experte",
+    "SUN": "Sonnenschutz",
+    "ENERGY": "Solarenergie"
+  },
+  "SOLAR_ADVICE": {
+    "NIGHT": "Es ist Nacht; kein Risiko durch direkte Sonne, aber UV-Strahlung kann unter Bedingungen wirken.",
+    "LOW": "Niedrige Strahlung; kein Schutz erforderlich.",
+    "MODERATE": "Mäßige Strahlung; Sonnenschutz wird empfohlen.",
+    "HIGH": "Hohe Strahlung; Sonnenschutz wichtig, lange Sonnenbäder vermeiden.",
+    "EXTREME": "Extreme Strahlung; Aufenthalt im Haus empfohlen, draußen unbedingt Sonnenschutz."
+  },
+  "RISK": {
+    "NIGHT": "Minimal",
+    "LOW": "Niedrig",
+    "MODERATE": "Mäßig",
+    "HIGH": "Hoch",
+    "EXTREME": "Extrem"
+  }
+}
