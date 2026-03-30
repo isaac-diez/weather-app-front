@@ -1,0 +1,84 @@
+{
+  "APP_TITLE": "Smart Weather",
+  "SEARCH_PLACEHOLDER": "Entrez une ville (ex: Paris)...",
+  "SEARCH_BUTTON": "Rechercher",
+  "LOADING": "Consultation du satellite...",
+  "ERROR_NOT_FOUND": "Ville non trouvée.",
+  "ERROR_SERVER": "Le serveur se réveille, veuillez réessayer.",
+  "VIEW": {
+    "WEATHER": "Météo",
+    "SOLAR": "Solaire",
+    "AIR": "Qualité de l'air"
+  },
+  "WEATHER": {
+    "NOW": "MTN",
+    "RAIN": "Pluie",
+    "CLOUDY": "Nuageux",
+    "CLEAR": "Dégagé",
+    "FEELS_LIKE": "Ressenti"
+  },
+  "SOLAR": {
+    "STATE": "DONNÉES SOLAIRES",
+    "UV_MAX": "UV Max",
+    "AT": "à "
+  },
+  "WEATHER_CARD": {
+    "HUMIDITY": "HUMIDITÉ",
+    "WIND": "VENT",
+    "RAIN_CHANCE": "RISQUE PLUIE",
+    "CLOUD_COVER": "COUVERTURE",
+    "UV_INDEX": "INDICE UV",
+    "WIND_GUSTS": "RAFALES"
+  },
+  "SOLAR_CARD": {
+    "RISK": "RISQUE UV",
+    "RADIATION": "RADIATION",
+    "SUNRISE": "LEVER",
+    "SUNSET": "COUCHER",
+    "SUNSHINE_HOURS": "ENSOLEILLEMENT",
+    "DAYLIGHT_HOURS": "JOUR",
+    "ADVICE": "CONSEIL"
+  },
+  "7_DAY_FORECAST": {
+    "TITLE": "Prévisions 7 jours",
+    "MON": "LUN",
+    "TUE": "MAR",
+    "WED": "MER",
+    "THU": "JEU",
+    "FRI": "VEN",
+    "SAT": "SAM",
+    "SUN": "DIM"
+  },
+  "24_HOUR_FORECAST": {
+    "TITLE_WEATHER": "Prévisions 24h",
+    "TITLE_SUN": "Prévisions indice UV",
+    "TODAY": "AUJOURD'HUI",
+    "TOMORROW": "DEMAIN",
+    "UV_INDEX": "INDICE UV"
+  },
+  "AI_SECTION": {
+    "TITLE": "Assistant IA Intelligent",
+    "DISCLAIMER": "Générée par l'IA. Veuillez vérifier cette information.",
+    "NO_AI": "IA non disponible pour le moment. Réessayez plus tard.",
+    "OUTFIT": "Conseil Tenue",
+    "ACTIVITY": "Guide Urbain",
+    "LAUNDRY": "Lessive",
+    "DRINK": "Expert Bar",
+    "SUN": "Protection",
+    "ENERGY": "Énergie Solaire"
+  },
+  "SOLAR_ADVICE": {
+    "NIGHT": "Il fait nuit ; pas de risque direct, mais les UV peuvent persister sous certaines conditions.",
+    "LOW": "Radiation faible ; protection non nécessaire.",
+    "MODERATE": "Radiation modérée ; l'utilisation de crème solaire est recommandée.",
+    "HIGH": "Radiation élevée ; utilisez de la crème et évitez l'exposition prolongée.",
+    "EXTREME": "Radiation extrême ; restez à l'intérieur ou protégez-vous impérativement."
+  },
+  "RISK": {
+    "NIGHT": "Minimal",
+    "LOW": "Faible",
+    "MODERATE": "Modéré",
+    "HIGH": "Élevé",
+    "EXTREME": "Extrême"
+  }
+}
