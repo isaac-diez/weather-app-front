@@ -1,0 +1,84 @@
+{
+  "APP_TITLE": "Smart Weather",
+  "SEARCH_PLACEHOLDER": "Escriu el nom d'una ciutat (ex. Londres)...",
+  "SEARCH_BUTTON": "Cercar",
+  "LOADING": "Consultant amb el satèl·lit...",
+  "ERROR_NOT_FOUND": "Ciutat no trobada.",
+  "ERROR_SERVER": "El servidor s'està despertant, torna-ho a intentar.",
+  "VIEW": {
+    "WEATHER": "Temps",
+    "SOLAR": "Solar",
+    "AIR": "Qualitat de l'aire"
+  },
+  "WEATHER": {
+    "NOW": "ARA",
+    "RAIN": "Pluja",
+    "CLOUDY": "Ennuvolat",
+    "CLEAR": "Serè",
+    "FEELS_LIKE": "Sensació"
+  },
+  "SOLAR": {
+    "STATE": "DADES SOLARS",
+    "UV_MAX": "UV Max",
+    "AT": "a les "
+  },
+  "WEATHER_CARD": {
+    "HUMIDITY": "HUMITAT",
+    "WIND": "VENT",
+    "RAIN_CHANCE": "PLUJA",
+    "CLOUD_COVER": "COBERTURA",
+    "UV_INDEX": "ÍNDEX UV",
+    "WIND_GUSTS": "RAFEGUES"
+  },
+  "SOLAR_CARD": {
+    "RISK": "RISC UV",
+    "RADIATION": "RADIACIÓ",
+    "SUNRISE": "SORTIDA",
+    "SUNSET": "POSTA",
+    "SUNSHINE_HOURS": "LLUM SOLAR",
+    "DAYLIGHT_HOURS": "LLUM DIÜRNA",
+    "ADVICE": "CONSELL"
+  },
+  "7_DAY_FORECAST": {
+    "TITLE": "Previsió de 7 dies",
+    "MON": "DL",
+    "TUE": "DT",
+    "WED": "DC",
+    "THU": "DJ",
+    "FRI": "DV",
+    "SAT": "DS",
+    "SUN": "DG"
+  },
+  "24_HOUR_FORECAST": {
+    "TITLE_WEATHER": "Previsió de 24 hores",
+    "TITLE_SUN": "Previsió índex UV",
+    "TODAY": "AVUI",
+    "TOMORROW": "DEMÀ",
+    "UV_INDEX": "ÍNDEX UV"
+  },
+  "AI_SECTION": {
+    "TITLE": "Assistent Intel·ligent amb IA",
+    "DISCLAIMER": "Generat per IA. Si us plau, verifica aquesta informació.",
+    "NO_AI": "Ho sentim, la IA no està disponible ara mateix. Torna-ho a intentar més tard.",
+    "OUTFIT": "Estilista",
+    "ACTIVITY": "Guia Local",
+    "LAUNDRY": "Bugada",
+    "DRINK": "Expert en Bars",
+    "SUN": "Protecció",
+    "ENERGY": "Energia Solar"
+  },
+  "SOLAR_ADVICE": {
+    "NIGHT": "És de nit; no hi ha risc d'exposició solar directa, però la radiació UV encara pot tenir efecte sota certes condicions.",
+    "LOW": "Radiació solar baixa; no cal massa protecció.",
+    "MODERATE": "Radiació solar moderada; es recomana utilitzar protecció solar.",
+    "HIGH": "Alta radiació solar; és important utilitzar protecció solar i evitar l'exposició prolongada al sol.",
+    "EXTREME": "Radiació solar extrema; es recomana romandre a l'interior i utilitzar protecció solar total si cal sortir."
+  },
+  "RISK": {
+    "NIGHT": "Molt baix",
+    "LOW": "Baix",
+    "MODERATE": "Moderat",
+    "HIGH": "Alt",
+    "EXTREME": "Extrem"
+  }
+}
