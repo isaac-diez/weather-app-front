@@ -11,8 +11,12 @@ export class AppComponent {
 
     this.translate.setDefaultLang('en');
 
-    const browserLang = this.translate.getBrowserLang();
+    const supportedLangs = ['es', 'en', 'de', 'fr', 'it', 'pt', 'ru', 'zh', 'ja', 'ko', 'gl', 'ca', 'eu'];
 
-    this.translate.use(browserLang?.match(/es/) ? 'es' : 'en');
+    const browserLang = this.translate.getBrowserLang() || 'en';
+
+    const langToUse = supportedLangs.includes(browserLang) ? browserLang : 'en';
+
+    this.translate.use(langToUse);
   }
 }
