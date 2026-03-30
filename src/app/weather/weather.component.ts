@@ -12,6 +12,8 @@ import { TranslateService } from '@ngx-translate/core';
 export class WeatherComponent implements OnInit, OnDestroy {
 
   searchName = '';
+  isCitiesLoading = false;
+  isWeatherLoading = false;
   cityList: CityDTO[] = [];
   selectedCity?: CityDTO;
   showDropdown = false;
@@ -25,7 +27,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
   aiResponse: string | null = null;
   isAiLoading = false;
   aiError: string | null = null;
-  activeAiMode: 'outfit' | 'activity' | 'laundry' | 'drink' | null = null;
+  activeAiMode: 'outfit' | 'activity' | 'laundry' | 'drink' | 'sun' | 'energy' | null = null;
 
   private searchSubject = new Subject<string>();
   private searchSubscription?: Subscription;
@@ -66,25 +68,28 @@ export class WeatherComponent implements OnInit, OnDestroy {
     }
 
   private _executeSearch(name: string) {
-    const term = name.trim();
-    if (term.length < 3) {
-      this.cityList = [];
-      this.showDropdown = false;
-      return;
-    }
-
-    this.weatherService.getCities(this.searchName).subscribe({
-      next: (data: CityListDTO) => {
-        this.cityList = data.cities;
-        this.showDropdown = true;
-        this.error = undefined;
-      },
-      error: (err: any) => {
-        console.error(err);
-        this.error = 'Error al buscar ciudades.';
-      }
-    });
+  const term = name.trim();
+  if (term.length < 3) {
+    this.cityList = [];
+    this.showDropdown = false;
+    return;
   }
+
+  this.isCitiesLoading = true;
+  this.weatherService.getCities(term).subscribe({
+    next: (data: CityListDTO) => {
+      this.cityList = data.cities;
+      this.showDropdown = true;
+      this.error = undefined;
+      this.isCitiesLoading = false;
+    },
+    error: (err: any) => {
+      console.error(err);
+      this.error = 'Error al buscar ciudades.';
+      this.isCitiesLoading = false;
+    }
+  });
+}
 
   selectCity(city: CityDTO) {
     this.selectedCity = city;
@@ -101,17 +106,20 @@ export class WeatherComponent implements OnInit, OnDestroy {
     this.searchName = '';
   }
 
-  loadWeather() {
+loadWeather() {
   if (!this.selectedCity) return;
 
+  this.isWeatherLoading = true;
   this.weatherService.getFullWeather(this.selectedCity).subscribe({
     next: (data: FullWeatherDTO) => {
       this.currentWeather = data.current;
       this.forecast = data.forecast;
       this.solarSummary = data.solarSummary;
+      this.isWeatherLoading = false;
     },
     error: (err) => {
       this.error = 'Error al cargar los datos del tiempo.';
+      this.isWeatherLoading = false;
     }
   });
 }
@@ -135,16 +143,12 @@ export class WeatherComponent implements OnInit, OnDestroy {
 getSunPosition(percent: number | undefined): { x: number; y: number } {
   const safePercent = percent ?? 0;
 
-  // Ángulo: 180 grados (0%) a 0 grados (100%)
   const angleRad = Math.PI * (1 - safePercent / 100);
 
-  // Ahora el radio es 50 (la mitad de 100)
   const radius = 50;
 
-  // El centro horizontal es 50
   const centerX = 50;
 
-  // El centro vertical es 50 (la base del SVG)
   const centerY = 50;
 
   return {
@@ -177,7 +181,15 @@ getSunPosition(percent: number | undefined): { x: number; y: number } {
   return 'bi-arrow-up-left';
 }
 
-  askAi(mode: 'outfit' | 'activity' | 'laundry' | 'drink') {
+changeView(mode: 'general' | 'solar' | 'air') {
+  this.viewMode = mode;
+
+  this.aiResponse = null;
+  this.activeAiMode = null;
+  this.aiError = null;
+}
+
+  askAi(mode: 'outfit' | 'activity' | 'laundry' | 'drink' | 'sun' | 'energy') {
     if (!this.currentWeather || !this.selectedCity) return;
 
     this.isAiLoading = true;
@@ -195,7 +207,7 @@ getSunPosition(percent: number | undefined): { x: number; y: number } {
 
     this.weatherService.getAiSuggestion(request).subscribe({
       next: (response: string) => {
-        this.aiResponse = response;
+        this.aiResponse = response.trim();
         this.isAiLoading = false;
       },
       error: (err: any) => {
