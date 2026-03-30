@@ -109,6 +109,10 @@ export class WeatherComponent implements OnInit, OnDestroy {
 loadWeather() {
   if (!this.selectedCity) return;
 
+  this.aiResponse = null;
+  this.activeAiMode = null;
+  this.aiError = null;
+
   this.isWeatherLoading = true;
   this.weatherService.getFullWeather(this.selectedCity).subscribe({
     next: (data: FullWeatherDTO) => {
