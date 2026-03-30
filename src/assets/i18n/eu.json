@@ -1,0 +1,84 @@
+{
+  "APP_TITLE": "Smart Weather",
+  "SEARCH_PLACEHOLDER": "Idatzi hiri baten izena (adib. Londres)...",
+  "SEARCH_BUTTON": "Bilatu",
+  "LOADING": "Sateliteari kontsultatzen...",
+  "ERROR_NOT_FOUND": "Ez dugu hiria aurkitu.",
+  "ERROR_SERVER": "Zerbitzaria esnatzen ari da, saiatu berriro mesedez.",
+  "VIEW": {
+    "WEATHER": "Eguraldia",
+    "SOLAR": "Eguzkia",
+    "AIR": "Aire kalitatea"
+  },
+  "WEATHER": {
+    "NOW": "ORAIN",
+    "RAIN": "Euria",
+    "CLOUDY": "Hodeitsu",
+    "CLEAR": "Oskarbi",
+    "FEELS_LIKE": "Sentsazioa"
+  },
+  "SOLAR": {
+    "STATE": "EGUZKI DATUAK",
+    "UV_MAX": "UV Max",
+    "AT": "ordu honetan: "
+  },
+  "WEATHER_CARD": {
+    "HUMIDITY": "HEZETASUNA",
+    "WIND": "HAIZEA",
+    "RAIN_CHANCE": "EURIA",
+    "CLOUD_COVER": "ESTALIDURA",
+    "UV_INDEX": "UV INDIZEA",
+    "WIND_GUSTS": "ZALAPARTAK"
+  },
+  "SOLAR_CARD": {
+    "RISK": "UV ARRISKUA",
+    "RADIATION": "ERRADIAZIOA",
+    "SUNRISE": "EGUZKI-IRTEERA",
+    "SUNSET": "EGUZKI-SARRERA",
+    "SUNSHINE_HOURS": "EGUZKI-ARGIA",
+    "DAYLIGHT_HOURS": "EGUN ARGIA",
+    "ADVICE": "AHOLKUA"
+  },
+  "7_DAY_FORECAST": {
+    "TITLE": "7 eguneko iragarpena",
+    "MON": "AL",
+    "TUE": "AR",
+    "WED": "AZ",
+    "THU": "OG",
+    "FRI": "OR",
+    "SAT": "LR",
+    "SUN": "IG"
+  },
+  "24_HOUR_FORECAST": {
+    "TITLE_WEATHER": "24 orduko iragarpena",
+    "TITLE_SUN": "UV indizearen iragarpena",
+    "TODAY": "GAUR",
+    "TOMORROW": "BIHAR",
+    "UV_INDEX": "UV INDIZEA"
+  },
+  "AI_SECTION": {
+    "TITLE": "Laguntzaile Adimenduna (IA)",
+    "DISCLAIMER": "Erantzuna IA erabiliz sortu da. Mesedez, egiaztatu informazio hau.",
+    "NO_AI": "Sentitzen dugu, IA ez dago erabilgarri une honetan. Saiatu geroago.",
+    "OUTFIT": "Estilista",
+    "ACTIVITY": "Tokiko Gida",
+    "LAUNDRY": "Lixiba",
+    "DRINK": "Taberna Aditua",
+    "SUN": "Babesa",
+    "ENERGY": "Eguzki Energia"
+  },
+  "SOLAR_ADVICE": {
+    "NIGHT": "Gaua da; ez dago eguzki-izpi zuzenen arriskurik, baina UV erradiazioak eragina izan dezake egoera jakin batzuetan.",
+    "LOW": "Eguzki-erradiazio baxua; ez da babesik behar.",
+    "MODERATE": "Eguzki-erradiazio moderatua; eguzki-babesa erabiltzea gomendatzen da.",
+    "HIGH": "Eguzki-erradiazio altua; garrantzitsua da eguzki-babesa erabiltzea eta eguzkitan denbora luzez ez egotea.",
+    "EXTREME": "Muturreko eguzki-erradiazioa; etxe barruan geratzea gomendatzen da eta eguzki-babes osoa erabiltzea irten behar bada."
+  },
+  "RISK": {
+    "NIGHT": "Oso baxua",
+    "LOW": "Baxua",
+    "MODERATE": "Moderatua",
+    "HIGH": "Altua",
+    "EXTREME": "Muturrekoa"
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "APP_TITLE": "Smart Weather",
+  "SEARCH_PLACEHOLDER": "Inserisci città (es. Roma)...",
+  "SEARCH_BUTTON": "Cerca",
+  "LOADING": "Consultazione satellite...",
+  "ERROR_NOT_FOUND": "Città non trovata.",
+  "ERROR_SERVER": "Il server si sta riavviando, riprova.",
+  "VIEW": {
+    "WEATHER": "Meteo",
+    "SOLAR": "Solare",
+    "AIR": "Qualità Aria"
+  },
+  "WEATHER": {
+    "NOW": "ORA",
+    "RAIN": "Pioggia",
+    "CLOUDY": "Nuvoloso",
+    "CLEAR": "Sereno",
+    "FEELS_LIKE": "Percepita"
+  },
+  "SOLAR": {
+    "STATE": "DATI SOLARI",
+    "UV_MAX": "UV Max",
+    "AT": "alle "
+  },
+  "WEATHER_CARD": {
+    "HUMIDITY": "UMIDITÀ",
+    "WIND": "VENTO",
+    "RAIN_CHANCE": "PROB. PIOGGIA",
+    "CLOUD_COVER": "NUVOLOSITÀ",
+    "UV_INDEX": "INDICE UV",
+    "WIND_GUSTS": "RAFFICHE"
+  },
+  "SOLAR_CARD": {
+    "RISK": "RISCHIO UV",
+    "RADIATION": "RADIAZIONE",
+    "SUNRISE": "ALBA",
+    "SUNSET": "TRAMONTO",
+    "SUNSHINE_HOURS": "SOLE",
+    "DAYLIGHT_HOURS": "LUCE",
+    "ADVICE": "CONSIGLIO"
+  },
+  "7_DAY_FORECAST": {
+    "TITLE": "Previsioni 7 giorni",
+    "MON": "LUN",
+    "TUE": "MAR",
+    "WED": "MER",
+    "THU": "GIO",
+    "FRI": "VEN",
+    "SAT": "SAB",
+    "SUN": "DOM"
+  },
+  "24_HOUR_FORECAST": {
+    "TITLE_WEATHER": "Previsioni 24 ore",
+    "TITLE_SUN": "Previsioni Indice UV",
+    "TODAY": "OGGI",
+    "TOMORROW": "DOMANI",
+    "UV_INDEX": "INDICE UV"
+  },
+  "AI_SECTION": {
+    "TITLE": "Assistente Smart IA",
+    "DISCLAIMER": "Generato dall'intelligenza artificiale. Si prega di verificare questa informazione.",
+    "NO_AI": "IA non disponibile al momento. Riprova più tardi.",
+    "OUTFIT": "Consiglio Outfit",
+    "ACTIVITY": "Guida Turistica",
+    "LAUNDRY": "Bucato",
+    "DRINK": "Esperto Bar",
+    "SUN": "Protezione",
+    "ENERGY": "Energia Solare"
+  },
+  "SOLAR_ADVICE": {
+    "NIGHT": "È notte; nessun rischio diretto, ma i raggi UV possono agire in certe condizioni.",
+    "LOW": "Radiazione bassa; protezione non necessaria.",
+    "MODERATE": "Radiazione moderata; si consiglia crema solare.",
+    "HIGH": "Radiazione alta; usare crema solare ed evitare esposizione prolungata.",
+    "EXTREME": "Radiazione estrema; restare al chiuso e proteggersi se si esce."
+  },
+  "RISK": {
+    "NIGHT": "Minimo",
+    "LOW": "Basso",
+    "MODERATE": "Moderato",
+    "HIGH": "Alto",
+    "EXTREME": "Estremo"
+  }
+}

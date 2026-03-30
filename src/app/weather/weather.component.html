@@ -50,21 +50,21 @@
               [class]="viewMode === 'general' ? 'bg-blue-600 text-white shadow-blue-200' : 'bg-white text-slate-500 hover:bg-slate-50'"
               class="flex items-center gap-2 px-6 py-2.5 rounded-full font-bold shadow-lg transition-all duration-300 border border-transparent">
         <i class="bi bi-cloud-sun-fill"></i>
-        <span>Clima</span>
+        <span>{{ 'VIEW.WEATHER' | translate }}</span>
       </button>
 
       <button (click)="changeView('solar')"
               [class]="viewMode === 'solar' ? 'bg-yellow-500 text-white shadow-yellow-200' : 'bg-white text-slate-500 hover:bg-slate-50'"
               class="flex items-center gap-2 px-6 py-2.5 rounded-full font-bold shadow-lg transition-all duration-300 border border-transparent">
         <i class="bi bi-sun-fill"></i>
-        <span>Solar</span>
+        <span>{{ 'VIEW.SOLAR' | translate }}</span>
       </button>
 
 <!--      <button (click)="viewMode = 'air'"-->
 <!--              [class]="viewMode === 'air' ? 'bg-emerald-500 text-white shadow-emerald-200' : 'bg-white text-slate-500 hover:bg-slate-50'"-->
 <!--              class="flex items-center gap-2 px-6 py-2.5 rounded-full font-bold shadow-lg transition-all duration-300 border border-transparent">-->
 <!--        <i class="bi bi-wind"></i>-->
-<!--        <span>Aire</span>-->
+<!--        <span>{{ 'VIEW.AIR' | translate }}</span>-->
 <!--      </button>-->
     </div>
 
@@ -125,7 +125,9 @@
               <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-inner hover:bg-white/30 transition-colors duration-300">
                 <i class="bi text-2xl mb-2 opacity-90" [class]="getWindDirectionIcon(currentWeather.windDirection)"></i>
                 <span class="text-xs font-bold tracking-widest opacity-70 mb-1">{{ 'WEATHER_CARD.WIND' | translate}}</span>
-                <span class="text-xl font-bold"> {{ currentWeather.windSpeed }} km/h</span>
+                <span class="text-xl font-bold"> {{ currentWeather.windSpeed }}
+                  <span class="text-[10px] font-bold">km/h</span>
+                </span>
               </div>
 
               <!-- Detail 3: Rain Chance (Simulado o real) -->
@@ -154,7 +156,9 @@
               <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-inner hover:bg-white/30 transition-colors duration-300">
                 <i class="bi bi-wind text-2xl mb-2 opacity-90"></i>
                 <span class="text-xs font-bold tracking-widest opacity-70 mb-1">{{ 'WEATHER_CARD.WIND_GUSTS' | translate}}</span>
-                <span class="text-xl font-bold">{{ currentWeather.windGusts }} km/h</span>
+                <span class="text-xl font-bold">{{ currentWeather.windGusts }}
+                <span class="text-[10px] font-bold">km/h</span>
+                </span>
               </div>
 
             </div>
@@ -169,7 +173,7 @@
           {{ 'AI_SECTION.TITLE' | translate}}
         </h3>
 
-        <div class="flex flex-wrap gap-4 justify-center md:justify-start mb-6">
+        <div class="flex flex-wrap gap-4 justify-center md:justify-start mb-12">
           <!-- Button 1: Outfit -->
           <button (click)="askAi('outfit')"
                   [disabled]="isAiLoading && activeAiMode === 'outfit'"
@@ -204,7 +208,7 @@
       </div>
 
       <!-- AI Response Card -->
-      <div *ngIf="viewMode === 'general' && aiResponse" class="bg-white rounded-3xl p-6 shadow-xl border-l-8 border-blue-500 relative overflow-hidden transition-all duration-500 ease-in-out animate-fade-in-up">
+      <div *ngIf="viewMode === 'general' && aiResponse" class="bg-white rounded-3xl p-6 shadow-xl border-l-8 border-blue-500 relative overflow-hidden transition-all duration-500 ease-in-out animate-fade-in-up mb-12">
         <div class="absolute top-0 right-0 p-4 opacity-5 text-blue-500">
           <i class="bi bi-chat-quote-fill text-6xl"></i>
         </div>
@@ -212,6 +216,7 @@
           {{ activeAiMode === 'outfit' ? 'STYLE RECOMMENDATION' : activeAiMode === 'laundry' ? 'LAUNDRY ADVICE' : activeAiMode === 'activity' ? 'LOCAL SUGGESTIONS' : 'DRINK IN STYLE' }}
         </h6>
         <p class="text-lg text-slate-700 leading-relaxed font-medium whitespace-pre-line">{{ aiResponse }}</p>
+        <span class="block text-sm text-slate-400 leading-relaxed font-medium border-t border-slate-100 pt-4 mt-6">{{ 'AI_SECTION.DISCLAIMER' | translate }}</span>
       </div>
 
       <p *ngIf="aiError" class="text-red-500 text-sm mt-3 font-medium text-center bg-red-50 p-2 rounded-lg">{{ aiError }}</p>
@@ -219,7 +224,7 @@
 
       <!-- 24-HOUR FORECAST -->
       <div *ngIf="viewMode === 'general' && forecast" class="mb-12">
-        <h3 class="text-xl font-bold text-slate-800 mb-5">{{ '24_HOUR_FORECAST.TITLE' | translate}}</h3>
+        <h3 class="text-xl font-bold text-slate-800 mb-5">{{ '24_HOUR_FORECAST.TITLE_WEATHER' | translate}}</h3>
 
         <!-- Horizontal Scroll Container -->
         <div class="flex overflow-x-auto pb-6 gap-2 snap-x">
@@ -297,38 +302,47 @@
       </div>
         <div *ngIf="viewMode === 'solar' && forecast" class="animate-fade-in-up">
 
-          <div *ngIf="solarSummary" class="bg-white rounded-[2.5rem] p-8 shadow-xl border border-yellow-50 mb-8 relative overflow-hidden">
-            <div class="absolute -top-12 -right-12 w-40 h-40 bg-yellow-100 rounded-full opacity-30 blur-3xl"></div>
+          <div *ngIf="currentWeather && solarSummary" class="bg-white to-orange-300 rounded-[2.5rem] p-8 shadow-xl border border-yellow-50 mb-8 relative overflow-hidden">
+            <div class="absolute -top-12 -right-12 w-40 h-40 bg-yellow-100 rounded-full opacity-30 blur-3xl" style="
+    background-color: rgb(255 131 30)"></div>
 
             <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
-              <div class="text-center md:text-left">
-                <h4 class="text-slate-400 font-bold uppercase text-xs tracking-widest mb-2">Estado Solar</h4>
-                <div class="flex items-center justify-center md:justify-start gap-3 mb-3">
+              <div class="flex flex-col items-center md:items-start text-center md:text-left space-y-2">
+                <h4 class="text-slate-400 font-bold uppercase text-xs tracking-widest mb-2">{{ 'SOLAR.STATE' | translate }}</h4>
 
+                <!-- City & Badge -->
+                <div class="flex items-center gap-3 mb-2">
+                  <h2 class="text-3xl md:text-4xl font-bold tracking-tight">{{ currentWeather.city }}</h2>
+                  <span class="bg-white/20 backdrop-blur-md text-xs font-bold px-2 py-1 rounded-md uppercase tracking-wider shadow-sm">
+                      {{ 'WEATHER.NOW' | translate }}
+                    </span>
+                </div>
+
+                <div class="flex items-center justify-center md:justify-start gap-3 mb-3">
                   <span class="text-5xl font-black text-green-500" [ngClass]="getUvColorClass(solarSummary.uvIndexHourly)">
                     {{ solarSummary.uvIndexHourly }}
                   </span>
 
                   <div class="flex flex-col text-left">
-                    <span class="font-bold text-yellow-600">UV Máximo {{ solarSummary.maxUvIndexToday }}</span>
-                    <span class="text-sm text-slate-400">a las {{ solarSummary.peakUvTime | date: 'HH:mm' }}</span>
+                    <span class="font-bold text-yellow-600">{{ 'SOLAR.UV_MAX' | translate }} {{ solarSummary.maxUvIndexToday }}</span>
+                    <span class="text-sm text-slate-400">{{ 'SOLAR.AT' | translate }} {{ solarSummary.peakUvTime | date: 'HH:mm' }}</span>
                   </div>
 
                 </div>
-                <p class="text-slate-600 font-medium max-w-md">{{ solarSummary.recommendation }}</p>
+                <p class="text-slate-600 font-medium max-w-md">{{ solarSummary.recommendation | translate }}</p>
               </div>
 
               <div class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full md:w-auto">
                 <div class="p-4 rounded-3xl text-center border shadow-sm transition-colors duration-500"
                      [ngClass]="getUvColorClass(solarSummary.uvIndexHourly)">
                   <i class="bi bi-shield-exclamation text-2xl"></i>
-                  <span class="block text-[10px] font-bold uppercase mt-1 tracking-tight">Riesgo UV</span>
-                  <span class="block text-lg font-extrabold">{{ solarSummary.riskLevel }}</span>
+                  <span class="block text-[10px] font-bold uppercase mt-1 tracking-tight">{{ 'SOLAR_CARD.RISK' | translate }}</span>
+                  <span class="block text-lg font-extrabold">{{ solarSummary.riskLevel | translate}}</span>
                 </div>
 
                 <div class="bg-emerald-50 p-4 rounded-3xl text-center border border-emerald-100 shadow-sm">
                   <i class="bi bi-lightning-charge-fill text-emerald-500 text-2xl"></i>
-                  <span class="block text-[10px] font-bold text-emerald-700 uppercase mt-1 tracking-tight">Radiación</span>
+                  <span class="block text-[10px] font-bold text-emerald-700 uppercase mt-1 tracking-tight">{{ 'SOLAR_CARD.RADIATION' | translate }}</span>
                   <span class="block text-lg font-extrabold text-slate-800">
                     {{ solarSummary.shortwaveRadiation }}
                     <span class="text-[10px] font-bold">W/m²</span>
@@ -337,25 +351,25 @@
 
                 <div class="bg-orange-50 p-4 rounded-3xl text-center border border-orange-100 shadow-sm">
                   <i class="bi bi-sunrise-fill text-orange-500 text-2xl"></i>
-                  <span class="block text-[10px] font-bold text-orange-700 uppercase mt-1 tracking-tight">Amanecer</span>
+                  <span class="block text-[10px] font-bold text-orange-700 uppercase mt-1 tracking-tight">{{ 'SOLAR_CARD.SUNRISE' | translate }}</span>
                   <span class="block text-lg font-extrabold text-slate-800">{{ solarSummary.sunrise  | date:'HH:mm' }}</span>
                 </div>
 
                 <div class="bg-indigo-50 p-4 rounded-3xl text-center border border-indigo-100 shadow-sm">
                   <i class="bi bi-sunset-fill text-indigo-500 text-2xl"></i>
-                  <span class="block text-[10px] font-bold text-indigo-700 uppercase mt-1 tracking-tight">Ocaso</span>
+                  <span class="block text-[10px] font-bold text-indigo-700 uppercase mt-1 tracking-tight">{{ 'SOLAR_CARD.SUNSET' | translate }}</span>
                   <span class="block text-lg font-extrabold text-slate-800">{{ solarSummary.sunset  | date:'HH:mm' }}</span>
                 </div>
 
                 <div class=" bg-amber-50 p-4 rounded-3xl text-center border border-amber-100 shadow-sm">
                   <i class="bi bi-sun-fill text-amber-500 text-2xl"></i>
-                  <span class="block text-[10px] font-bold text-amber-700 uppercase mt-1 tracking-tight">Horas de Sol</span>
+                  <span class="block text-[10px] font-bold text-amber-700 uppercase mt-1 tracking-tight">{{ 'SOLAR_CARD.SUNSHINE_HOURS' | translate }}</span>
                   <span class="block text-lg font-extrabold text-slate-800">{{ solarSummary.sunshineHours }}</span>
                 </div>
 
                 <div class="bg-sky-50 p-4 rounded-3xl text-center border border-sky-100 shadow-sm">
                   <i class="bi bi-cloud-sun-fill text-sky-500 text-2xl"></i>
-                  <span class="block text-[10px] font-bold text-sky-700 uppercase mt-1 tracking-tight">Día Total</span>
+                  <span class="block text-[10px] font-bold text-sky-700 uppercase mt-1 tracking-tight">{{ 'SOLAR_CARD.DAYLIGHT_HOURS' | translate }}</span>
                   <span class="block text-lg font-extrabold text-slate-800">{{ solarSummary.daylightHours }}</span>
                 </div>
               </div>
@@ -369,7 +383,7 @@
               {{ 'AI_SECTION.TITLE' | translate}}
             </h3>
 
-            <div class="flex flex-wrap gap-4 justify-center md:justify-start mb-6">
+            <div class="flex flex-wrap gap-4 justify-center md:justify-start mb-12">
               <!-- Button 1: Sun -->
               <button (click)="askAi('sun')"
                       [disabled]="isAiLoading && activeAiMode === 'sun'"
@@ -389,7 +403,7 @@
             </div>
 
             <!-- AI Response Card -->
-            <div *ngIf="viewMode === 'solar' && aiResponse" class="bg-white rounded-3xl p-6 shadow-xl border-l-8 border-blue-500 relative overflow-hidden transition-all duration-500 ease-in-out">
+            <div *ngIf="viewMode === 'solar' && aiResponse" class="bg-white rounded-3xl p-6 shadow-xl border-l-8 border-blue-500 relative overflow-hidden transition-all duration-500 ease-in-out animate-fade-in-up mb-12">
               <div class="absolute top-0 right-0 p-4 opacity-5 text-blue-500">
                 <i class="bi bi-chat-quote-fill text-6xl"></i>
               </div>
@@ -397,6 +411,8 @@
                 {{ activeAiMode === 'sun' ? 'SUN PROTECTION RECOMMENDATION' : activeAiMode === 'energy' ? 'MAXIMIZE YOUR SOLAR PRODUCTION' : '' }}
               </h6>
               <p class="text-lg text-slate-700 leading-relaxed font-medium whitespace-pre-line">{{ aiResponse }}</p>
+              <span class="block text-sm text-slate-400 leading-relaxed font-medium border-t border-slate-100 pt-4 mt-6">{{ 'AI_SECTION.DISCLAIMER' | translate }}</span>
+
             </div>
 
             <p *ngIf="aiError" class="text-red-500 text-sm mt-3 font-medium text-center bg-red-50 p-2 rounded-lg">{{ aiError }}</p>
@@ -439,7 +455,7 @@
             </div>
           </div>
 
-          <h3 class="text-xl font-bold text-slate-800 mb-5">Evolución Radiación UV</h3>
+          <h3 class="text-xl font-bold text-slate-800 mb-5">{{ '24_HOUR_FORECAST.TITLE_SUN' | translate }}</h3>
           <div class="flex overflow-x-auto pb-6 gap-2 snap-x">
             <div *ngFor="let hourItem of forecast.hours"
                  class="min-w-[110px] bg-white rounded-3xl p-4 flex flex-col items-center justify-between shadow-md border border-slate-50 h-40 snap-start">
@@ -453,7 +469,7 @@
               <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
                 <div [ngClass]="getUvBarColorClass(hourItem.uv_index)" class="h-full" [style.width.%]="(hourItem.uv_index / 12) * 100"></div>
               </div>
-              <span class="text-[9px] text-slate-400 font-bold uppercase">Índice UV</span>
+              <span class="text-[9px] text-slate-400 font-bold uppercase">{{ '24_HOUR_FORECAST.UV_INDEX' | translate}}</span>
             </div>
           </div>
         </div>

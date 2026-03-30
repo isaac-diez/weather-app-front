@@ -5,6 +5,11 @@
   "LOADING": "Consultando con el satélite...",
   "ERROR_NOT_FOUND": "Ciudad no encontrada.",
   "ERROR_SERVER": "El servidor está arrancando, intenta de nuevo.",
+  "VIEW": {
+    "WEATHER": "Clima",
+    "SOLAR": "Solar",
+    "AIR": "Aire"
+  },
   "WEATHER": {
     "NOW": "AHORA",
     "RAIN": "Lluvia",
@@ -12,13 +17,27 @@
     "CLEAR": "Despejado",
     "FEELS_LIKE": "Sensación"
   },
+  "SOLAR": {
+    "STATE": "Datos solares",
+    "UV_MAX": "UV Max",
+    "AT": "a las "
+  },
   "WEATHER_CARD": {
     "HUMIDITY": "HUMEDAD",
     "WIND": "VIENTO",
     "RAIN_CHANCE": "LLUVIA",
     "CLOUD_COVER": "COBERTURA",
-    "UV_INDEX": "INDICE UV",
+    "UV_INDEX": "ÍNDICE UV",
     "WIND_GUSTS": "RACHAS"
+  },
+  "SOLAR_CARD": {
+    "RISK": "RIESGO UV",
+    "RADIATION": "RADIACIÓN",
+    "SUNRISE": "AMANECER",
+    "SUNSET": "PUESTA",
+    "SUNSHINE_HOURS": "HORAS DE SOL",
+    "DAYLIGHT_HOURS": "LUZ DIURNA",
+    "ADVICE": "RECOMENDACIÓN"
   },
   "7_DAY_FORECAST": {
     "TITLE": "Previsión semanal",
@@ -31,17 +50,35 @@
     "SUN": "DOM"
   },
   "24_HOUR_FORECAST": {
-    "TITLE": "Previsión horaria",
+    "TITLE_WEATHER": "Previsión horaria",
+    "TITLE_SUN": "Previsión Indice UV",
     "TODAY": "HOY",
-    "TOMORROW": "MAÑANA"
+    "TOMORROW": "MAÑANA",
+    "UV_INDEX": "Indice UV"
   },
   "AI_SECTION": {
     "TITLE": "Asistente Inteligente con IA",
-    "DISCLAIMER": "Generado por IA",
+    "DISCLAIMER": "Generado por IA. Recuerda revisar los datos importantes.",
     "NO_AI": "La IA no disponible ahora mismo, intentalo mas tarde",
     "OUTFIT": "Estilista",
     "ACTIVITY": "Guia Local",
     "LAUNDRY": "Colada",
-    "DRINK": "Experto en Bares"
+    "DRINK": "Experto en Bares",
+    "SUN": "Protección",
+    "ENERGY": "Energía Solar"
+  },
+  "SOLAR_ADVICE": {
+    "NIGHT": "Es de noche, no hay riesgo de exposición solar directa, pero la radiación UV tambien puede afectar en ciertas condiciones.",
+    "LOW": "Aunque el riesgo es bajo siempre es recomendable usar protección solar.",
+    "MODERATE": "Radiación solar moderada, se recomienda usar protección solar alta.",
+    "HIGH": "Alta radiación solar, es importante usar protección solar alta y evitar la exposición prolongada al sol.",
+    "EXTREME": "Radiación solar extrema, se recomienda permanecer en interiores y usar protección solar total si es necesario salir."
+  },
+  "RISK": {
+    "NIGHT": "Muy bajo",
+    "LOW": "Bajo",
+    "MODERATE": "Moderado",
+    "HIGH": "Alto",
+    "EXTREME": "Extremo"
   }
 }

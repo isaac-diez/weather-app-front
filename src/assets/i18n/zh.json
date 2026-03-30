@@ -1,0 +1,84 @@
+{
+  "APP_TITLE": "Smart Weather",
+  "SEARCH_PLACEHOLDER": "输入城市 (如：北京)...",
+  "SEARCH_BUTTON": "搜索",
+  "LOADING": "正在查询卫星...",
+  "ERROR_NOT_FOUND": "未找到城市。",
+  "ERROR_SERVER": "服务器正在唤醒，请重试。",
+  "VIEW": {
+    "WEATHER": "天气",
+    "SOLAR": "太阳能",
+    "AIR": "空气质量"
+  },
+  "WEATHER": {
+    "NOW": "现在",
+    "RAIN": "雨",
+    "CLOUDY": "多云",
+    "CLEAR": "晴朗",
+    "FEELS_LIKE": "体感"
+  },
+  "SOLAR": {
+    "STATE": "太阳数据",
+    "UV_MAX": "最高紫外线",
+    "AT": "在 "
+  },
+  "WEATHER_CARD": {
+    "HUMIDITY": "湿度",
+    "WIND": "风速",
+    "RAIN_CHANCE": "降水概率",
+    "CLOUD_COVER": "云量",
+    "UV_INDEX": "紫外线指数",
+    "WIND_GUSTS": "阵风"
+  },
+  "SOLAR_CARD": {
+    "RISK": "紫外线风险",
+    "RADIATION": "辐射强度",
+    "SUNRISE": "日出",
+    "SUNSET": "日落",
+    "SUNSHINE_HOURS": "日照",
+    "DAYLIGHT_HOURS": "昼长",
+    "ADVICE": "建议"
+  },
+  "7_DAY_FORECAST": {
+    "TITLE": "7日预报",
+    "MON": "周一",
+    "TUE": "周二",
+    "WED": "周三",
+    "THU": "周四",
+    "FRI": "周五",
+    "SAT": "周六",
+    "SUN": "周日"
+  },
+  "24_HOUR_FORECAST": {
+    "TITLE_WEATHER": "24小时预报",
+    "TITLE_SUN": "紫外线指数预报",
+    "TODAY": "今天",
+    "TOMORROW": "明天",
+    "UV_INDEX": "紫外线指数"
+  },
+  "AI_SECTION": {
+    "TITLE": "AI智能助手",
+    "DISCLAIMER": "由人工智能生成。请核实此信息。",
+    "NO_AI": "AI当前不可用，请稍后重试。",
+    "OUTFIT": "穿搭建议",
+    "ACTIVITY": "城市指南",
+    "LAUNDRY": "晾晒建议",
+    "DRINK": "饮品专家",
+    "SUN": "防晒保护",
+    "ENERGY": "太阳能发电"
+  },
+  "SOLAR_ADVICE": {
+    "NIGHT": "现在是夜晚，无直射风险，但在特定条件下仍有紫外线影响。",
+    "LOW": "紫外线较弱，无需防护。",
+    "MODERATE": "紫外线中等，建议涂抹防晒霜。",
+    "HIGH": "紫外线较强，请涂抹防晒霜并避免长时间曝晒。",
+    "EXTREME": "极强紫外线，建议留在室内，外出必须采取防晒措施。"
+  },
+  "RISK": {
+    "NIGHT": "极低",
+    "LOW": "低",
+    "MODERATE": "中等",
+    "HIGH": "高",
+    "EXTREME": "极高"
+  }
+}

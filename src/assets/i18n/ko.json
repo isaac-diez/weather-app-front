@@ -1,0 +1,84 @@
+{
+  "APP_TITLE": "Smart Weather",
+  "SEARCH_PLACEHOLDER": "도시 입력 (예: 서울)...",
+  "SEARCH_BUTTON": "검색",
+  "LOADING": "위성 확인 중...",
+  "ERROR_NOT_FOUND": "도시를 찾을 수 없습니다.",
+  "ERROR_SERVER": "서버를 시작 중입니다. 다시 시도해 주세요.",
+  "VIEW": {
+    "WEATHER": "날씨",
+    "SOLAR": "태양광",
+    "AIR": "공기 질"
+  },
+  "WEATHER": {
+    "NOW": "현재",
+    "RAIN": "비",
+    "CLOUDY": "흐림",
+    "CLEAR": "맑음",
+    "FEELS_LIKE": "체감 온도"
+  },
+  "SOLAR": {
+    "STATE": "태양 데이터",
+    "UV_MAX": "최대 자외선",
+    "AT": "시간: "
+  },
+  "WEATHER_CARD": {
+    "HUMIDITY": "습도",
+    "WIND": "풍속",
+    "RAIN_CHANCE": "강수 확률",
+    "CLOUD_COVER": "구름 양",
+    "UV_INDEX": "자외선 지수",
+    "WIND_GUSTS": "돌풍"
+  },
+  "SOLAR_CARD": {
+    "RISK": "자외선 위험",
+    "RADIATION": "복사 에너지",
+    "SUNRISE": "일출",
+    "SUNSET": "일몰",
+    "SUNSHINE_HOURS": "일조 시간",
+    "DAYLIGHT_HOURS": "낮 길이",
+    "ADVICE": "조언"
+  },
+  "7_DAY_FORECAST": {
+    "TITLE": "7일 예보",
+    "MON": "월",
+    "TUE": "화",
+    "WED": "수",
+    "THU": "목",
+    "FRI": "금",
+    "SAT": "토",
+    "SUN": "일"
+  },
+  "24_HOUR_FORECAST": {
+    "TITLE_WEATHER": "24시간 예보",
+    "TITLE_SUN": "자외선 지수 예보",
+    "TODAY": "오늘",
+    "TOMORROW": "내일",
+    "UV_INDEX": "자외선 지수"
+  },
+  "AI_SECTION": {
+    "TITLE": "AI 스마트 어시스턴트",
+    "DISCLAIMER": "AI 에 의해 생성. 이 정보를 확인해 주세요.",
+    "NO_AI": "현재 AI를 사용할 수 없습니다. 나중에 다시 시도하세요.",
+    "OUTFIT": "옷차림 추천",
+    "ACTIVITY": "도시 가이드",
+    "LAUNDRY": "빨래 제안",
+    "DRINK": "음료 전문가",
+    "SUN": "피부 보호",
+    "ENERGY": "태양광 발전"
+  },
+  "SOLAR_ADVICE": {
+    "NIGHT": "밤입니다. 직사광선 위험은 없으나 특정 조건에서 UV 영향이 있을 수 있습니다.",
+    "LOW": "자외선이 낮음. 보호 조치가 필요하지 않습니다.",
+    "MODERATE": "자외선 보통. 자외선 차단제 사용을 권장합니다.",
+    "HIGH": "자외선 높음. 차단제를 바르고 장시간 노출을 피하세요.",
+    "EXTREME": "자외선 매우 높음. 실내에 머무르고 외출 시 반드시 차단하세요."
+  },
+  "RISK": {
+    "NIGHT": "최저",
+    "LOW": "낮음",
+    "MODERATE": "보통",
+    "HIGH": "높음",
+    "EXTREME": "매우 높음"
+  }
+}
