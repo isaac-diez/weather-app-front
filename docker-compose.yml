@@ -1,0 +1,9 @@
+services:
+  weather-web:
+    build: .
+    container_name: weather-web
+    restart: always
+networks:
+  default:
+    external:
+      name: smartapp-network
