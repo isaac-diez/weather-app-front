@@ -8,7 +8,7 @@
   "VIEW": {
     "WEATHER": "Weather",
     "SOLAR": "Solar",
-    "AIR": "Air Quality"
+    "AIR": "Air"
   },
   "WEATHER": {
     "NOW": "NOW",
@@ -21,6 +21,16 @@
     "STATE": "SOLAR DATA",
     "UV_MAX": "UV Max",
     "AT": "at "
+  },
+  "AIR": {
+    "STATE": "AIR QUALITY",
+    "AQI": "AQI",
+    "GOOD": "Good",
+    "MODERATE": "Moderate",
+    "UNHEALTHY_SENSITIVE": "Unhealthy for Sensitive Groups",
+    "UNHEALTHY": "Unhealthy",
+    "VERY_UNHEALTHY": "Very Unhealthy",
+    "HAZARDOUS": "Hazardous"
   },
   "WEATHER_CARD": {
     "HUMIDITY": "HUMIDITY",
@@ -39,7 +49,6 @@
     "DAYLIGHT_HOURS": "DAYLIGHT",
     "ADVICE": "ADVICE"
   },
-
   "7_DAY_FORECAST": {
     "TITLE": "7-day forecast",
     "MON": "MON",
