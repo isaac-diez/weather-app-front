@@ -72,10 +72,52 @@ conditionText?: string;
 observationTime: string;
 }
 
+export interface AirQualityDTO {
+current: AirQualityCurrentDTO;
+hourly: AirQualityHourDTO[];
+}
+
+export interface AirQualityCurrentDTO{
+city: string;
+europeanAqi: number;
+pm2_5: number;
+pm10: number;
+carbonMonoxide: number;
+nitrogenDioxide: number;
+sulphurDioxide: number;
+ozone: number;
+aerosolOpticalDepth: number;
+dust: number;
+ammonia: number;
+ragweedPollen: number;
+olivePollen: number;
+mugwortPollen: number;
+grassPollen: number;
+birchPollen: number;
+alderPollen: number;
+}
+
+export interface AirQualityHourDTO {
+pm10: number;
+pm2_5: number;
+nitrogenDioxide: number;
+ozone: number;
+aerosolOpticalDepth: number;
+dust: number;
+ragweedPollen: number;
+olivePollen: number;
+mugwortPollen: number;
+grassPollen: number;
+birchPollen: number;
+alderPollen: number;
+europeanAqi: number;
+}
+
 export interface FullWeatherDTO {
 current: CurrentWeatherDTO;
 forecast: ForecastDTO;
-solarSummary: SolarSummaryDTO;
+solar: SolarSummaryDTO;
+airQuality: AirQualityDTO;
 }
 
 export interface GeminiRequest {
