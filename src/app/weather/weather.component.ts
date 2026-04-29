@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { WeatherService, CityDTO, FullWeatherDTO, CurrentWeatherDTO, ForecastDTO, CityListDTO, GeminiRequest, SolarSummaryDTO } from '../weather.service';
+import { WeatherService, CityDTO, FullWeatherDTO, CurrentWeatherDTO, ForecastDTO, CityListDTO, GeminiRequest, SolarSummaryDTO, AirQualityCurrentDTO, AirQualityDTO, AirQualityHourDTO } from '../weather.service';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { TranslateService } from '@ngx-translate/core';
@@ -118,7 +118,7 @@ loadWeather() {
     next: (data: FullWeatherDTO) => {
       this.currentWeather = data.current;
       this.forecast = data.forecast;
-      this.solarSummary = data.solarSummary;
+      this.solarSummary = data.solar;
       this.isWeatherLoading = false;
     },
     error: (err) => {
