@@ -24,6 +24,7 @@
   },
   "AIR": {
     "STATE": "AIR QUALITY",
+    "INDEX": "AIR QUALITY INDEX",
     "AQI": "AQI",
     "GOOD": "Good",
     "MODERATE": "Moderate",
@@ -48,6 +49,19 @@
     "SUNSHINE_HOURS": "SUNLIGHT",
     "DAYLIGHT_HOURS": "DAYLIGHT",
     "ADVICE": "ADVICE"
+  },
+  "AIR_CARD": {
+    "OZONE": "OZONE",
+    "AMMONIA": "AMMONIA",
+    "ADVICE": "ADVICE"
+  },
+  "AIR_ADVICE": {
+    "GOOD": "Excellent air quality; perfect for outdoor activities and ventilating your home.",
+    "MODERATE": "Fair air quality; most people can enjoy the outdoors, but sensitive groups should consider reducing heavy exercise.",
+    "UNHEALTHY_SENSITIVE": "Poor air quality; sensitive groups may experience health effects. It is recommended to limit prolonged outdoor exertion.",
+    "UNHEALTHY": "Unhealthy air quality; everyone may begin to experience health effects. Avoid long periods of outdoor activity.",
+    "VERY_UNHEALTHY": "Very unhealthy air quality; health alert level. It is recommended to stay indoors and keep windows closed.",
+    "HAZARDOUS": "Hazardous air conditions; emergency health warning. Avoid all outdoor physical activity and use air purifiers if possible."
   },
   "7_DAY_FORECAST": {
     "TITLE": "7-day forecast",
