@@ -60,12 +60,12 @@
         <span>{{ 'VIEW.SOLAR' | translate }}</span>
       </button>
 
-<!--      <button (click)="viewMode = 'air'"-->
-<!--              [class]="viewMode === 'air' ? 'bg-emerald-500 text-white shadow-emerald-200' : 'bg-white text-slate-500 hover:bg-slate-50'"-->
-<!--              class="flex items-center gap-2 px-6 py-2.5 rounded-full font-bold shadow-lg transition-all duration-300 border border-transparent">-->
-<!--        <i class="bi bi-wind"></i>-->
-<!--        <span>{{ 'VIEW.AIR' | translate }}</span>-->
-<!--      </button>-->
+      <button (click)="changeView('air')"
+              [class]="viewMode === 'air' ? 'bg-emerald-500 text-white shadow-emerald-200' : 'bg-white text-slate-500 hover:bg-slate-50'"
+              class="flex items-center gap-2 px-6 py-2.5 rounded-full font-bold shadow-lg transition-all duration-300 border border-transparent">
+        <i class="bi bi-wind"></i>
+        <span>{{ 'VIEW.AIR' | translate }}</span>
+      </button>
     </div>
 
     <!-- ERROR MESSAGE -->
@@ -299,12 +299,11 @@
           </div>
         </div>
     </div>
-      </div>
+  </div>
         <div *ngIf="viewMode === 'solar' && forecast" class="animate-fade-in-up">
 
           <div *ngIf="currentWeather && solarSummary" class="bg-white to-orange-300 rounded-[2.5rem] p-8 shadow-xl border border-yellow-50 mb-8 relative overflow-hidden">
-            <div class="absolute -top-12 -right-12 w-40 h-40 bg-yellow-100 rounded-full opacity-30 blur-3xl" style="
-    background-color: rgb(255 131 30)"></div>
+            <div class="absolute -top-12 -right-12 w-40 h-40 bg-yellow-100 rounded-full opacity-30 blur-3xl" style="background-color: rgb(255 131 30)"></div>
 
             <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
               <div class="flex flex-col items-center md:items-start text-center md:text-left space-y-2">
@@ -475,231 +474,157 @@
         </div>
 
     <!-- AIR QUALITY -->
-    <div *ngIf="viewMode === 'air' && currentWeather" class="animate-fade-in bg-gradient-to-br from-blue-400 to-blue-300 rounded-[2.5rem] p-8 md:p-10 text-white shadow-2xl mb-10 overflow-hidden relative">
+    <div *ngIf="viewMode === 'air' && forecast && airSummary" class="animate-fade-in-up">
 
-      <!-- Layout Grid: Left (Info) | Right (Details) -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative z-10">
+      <div *ngIf="currentWeather && airSummary" class="bg-white to-orange-300 rounded-[2.5rem] p-8 shadow-xl border border-yellow-50 mb-8 relative overflow-hidden">
+        <div class="absolute -top-12 -right-12 w-40 h-40 bg-yellow-100 rounded-full opacity-30 blur-3xl" style="background-color: rgb(255 131 30)"></div>
 
-        <!-- LEFT COL: Main Info -->
-        <div class="flex flex-col items-center md:items-start text-center md:text-left space-y-2">
-          <h4 class="text-slate-400 font-bold uppercase text-xs tracking-widest mb-2">{{ 'AIR.STATE' | translate }}</h4>
+        <div class="relative z-10 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div class="flex flex-col items-center md:items-start text-center md:text-left space-y-2">
+            <h4 class="text-slate-400 font-bold uppercase text-xs tracking-widest mb-2">{{ 'AIR.STATE' | translate }}</h4>
 
-          <!-- City & Badge -->
-          <div class="flex items-center gap-3 mb-2">
-            <h2 class="text-3xl md:text-4xl font-bold tracking-tight">{{ currentWeather.city }}</h2>
-            <span class="bg-white/20 backdrop-blur-md text-xs font-bold px-2 py-1 rounded-md uppercase tracking-wider shadow-sm">
-                {{ 'WEATHER.NOW' | translate }}
-              </span>
+            <!-- City & Badge -->
+            <div class="flex items-center gap-3 mb-2">
+              <h2 class="text-3xl md:text-4xl font-bold tracking-tight">{{ currentWeather.city }}</h2>
+              <span class="bg-white/20 backdrop-blur-md text-xs font-bold px-2 py-1 rounded-md uppercase tracking-wider shadow-sm">
+                      {{ 'WEATHER.NOW' | translate }}
+                    </span>
+            </div>
+
+            <div class="flex items-center justify-center md:justify-start gap-3 mb-3">
+                  <span class="text-5xl font-black text-green-500" [style.color]="getAqiColor(airSummary.europeanAqi)">{{ airSummary.europeanAqi }}</span>
+
+              <div class="flex flex-col text-left">
+                <span class="font-bold text-yellow-600" [style.color]="getAqiColor(airSummary.europeanAqi)"> {{ 'AIR.INDEX' | translate }} </span>
+              </div>
+            </div>
+            <p class="text-slate-600 font-medium max-w-md">{{ getAqiAdvice(airSummary.europeanAqi) | translate }}</p>
           </div>
 
-          <!-- Temperature -->
-          <div class="text-[7rem] leading-none font-bold tracking-tighter drop-shadow-sm">
-            {{ currentWeather.temperature }}°
-            <!-- Icon -->
-            <i class="bi huge-icon block md:inline-block text-white drop-shadow-md my-4"
-               [ngClass]="getWeatherIconClass(currentWeather.isDay, currentWeather.precipitation, currentWeather.cloudCover)">
-            </i>
-          </div>
+          <div class="grid grid-cols-2 md:grid-cols-3 gap-4 w-full md:w-auto">
+            <div [style.background-color]="getPm25Color(airSummary.pm2_5)"
+                 class="p-4 rounded-3xl text-center border shadow-sm transition-all duration-500">
 
-          <!-- Condition & RealFeel -->
-          <div class="space-y-1">
-            <p class="text-xl md:text-2xl font-medium opacity-90">{{ (currentWeather.conditionText || '') | translate }}</p>
-            <p class="text-sm font-semibold opacity-75">{{ 'WEATHER.FEELS_LIKE' | translate }} {{ currentWeather.apparentTemperature }}°</p>
+              <span class="block text-[10px] font-bold uppercase mt-1 tracking-tight text-slate-800">PM2.5</span>
+              <span class="block text-lg font-extrabold text-slate-900">{{ airSummary.pm2_5 }}</span>
+
+            </div>
+
+            <div [style.background-color]="getPm10Color(airSummary.pm10)"
+                 class="p-4 rounded-3xl text-center border shadow-sm transition-all duration-500">
+
+              <span class="block text-[10px] font-bold uppercase mt-1 tracking-tight text-slate-800">PM10</span>
+              <span class="block text-lg font-extrabold text-slate-900">{{ airSummary.pm10 }}</span>
+
+            </div>
+
+            <div [style.background-color]="getNo2Color(airSummary.pm2_5)"
+                 class="p-4 rounded-3xl text-center border shadow-sm transition-all duration-500">
+
+              <span class="block text-[10px] font-bold uppercase mt-1 tracking-tight text-slate-800">NO2</span>
+              <span class="block text-lg font-extrabold text-slate-900">{{ airSummary.nitrogenDioxide }}</span>
+
+            </div>
+
+            <div [style.background-color]="getSo2Color(airSummary.sulphurDioxide)"
+                 class="p-4 rounded-3xl text-center border shadow-sm transition-all duration-500">
+              <span class="block text-[10px] font-bold uppercase mt-1 tracking-tight text-slate-800">SO2</span>
+              <span class="block text-lg font-extrabold text-slate-900">{{ airSummary.sulphurDioxide }}</span>
+            </div>
+
+            <div [style.background-color]="getO3Color(airSummary.ozone)"
+                 class="p-4 rounded-3xl text-center border shadow-sm transition-all duration-500">
+              <span class="block text-[10px] font-bold uppercase mt-1 tracking-tight text-slate-800">{{ 'AIR_CARD.OZONE' | translate }}</span>
+              <span class="block text-lg font-extrabold text-slate-900">{{ airSummary.ozone }}</span>
+            </div>
+
+            <div class="bg-orange-50 p-4 rounded-3xl text-center border border-orange-100 shadow-sm">
+              <span class="block text-[10px] font-bold text-orange-700 uppercase mt-1 tracking-tight">CO2</span>
+              <span class="block text-lg font-extrabold text-slate-900">{{ airSummary.carbonMonoxide }}</span>
+            </div>
+
+            <div class="bg-indigo-50 p-4 rounded-3xl text-center border border-indigo-100 shadow-sm">
+<!--              <i class="bi bi-sunset-fill text-indigo-500 text-2xl"></i>-->
+              <span class="block text-[10px] font-bold text-indigo-700 uppercase mt-1 tracking-tight">{{ 'AIR_CARD.AMMONIA' | translate }}</span>
+              <span class="block text-lg font-extrabold text-slate-800">{{ airSummary.ammonia }}</span>
+            </div>
+
+            <div class="bg-sky-50 p-4 rounded-3xl text-center border border-sky-100 shadow-sm">
+<!--              <i class="bi bi-cloud-sun-fill text-sky-500 text-2xl"></i>-->
+              <span class="block text-[10px] font-bold text-sky-700 uppercase mt-1 tracking-tight">DUST</span>
+              <span class="block text-lg font-extrabold text-slate-800">{{ airSummary.dust }}</span>
+            </div>
+
+            <div class="bg-sky-50 p-4 rounded-3xl text-center border border-sky-100 shadow-sm">
+              <!--              <i class="bi bi-cloud-sun-fill text-sky-500 text-2xl"></i>-->
+              <span class="block text-[10px] font-bold text-sky-700 uppercase mt-1 tracking-tight">AOD</span>
+              <span class="block text-lg font-extrabold text-slate-800">{{ airSummary.aerosolOpticalDepth }}</span>
+            </div>
           </div>
         </div>
+      </div>
 
-        <!-- RIGHT COL: Details Grid (2x2 Glass Cards) -->
-        <div class="relative w-full h-full flex items-center">
-          <!-- Divider Line (Desktop only) -->
-          <div class="hidden md:block absolute left-[-20px] top-10 bottom-10 w-[1px] bg-white/20"></div>
 
-          <div class="grid grid-cols-2 gap-4 w-full">
+      <!-- AI SOLAR ASSISTANT SECTION-->
+      <div *ngIf="viewMode === 'air' && forecast" class="mb-12 animate-fade-in-up">
+        <h3 class="text-xl font-bold text-slate-800 mb-5 flex items-center gap-2">
+          {{ 'AI_SECTION.TITLE' | translate}}
+        </h3>
 
-            <!-- Detail 1: Humidity -->
-            <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-inner hover:bg-white/30 transition-colors duration-300">
-              <i class="bi bi-droplet-fill text-2xl mb-2 opacity-90"></i>
-              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">{{ 'WEATHER_CARD.HUMIDITY' | translate}}</span>
-              <span class="text-xl font-bold">{{ currentWeather.relativeHumidity }}%</span>
-            </div>
+        <div class="flex flex-wrap gap-4 justify-center md:justify-start mb-12">
+          <!-- Button 1: Sun -->
+          <button (click)="askAi('sun')"
+                  [disabled]="isAiLoading && activeAiMode === 'sun'"
+                  class="basis-[calc(50%-0.5rem)] md:flex-1 bg-white hover:bg-blue-50 text-slate-700 font-semibold py-4 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 border border-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">          <span class="text-2xl">☀️</span>
+            <span>{{ 'AI_SECTION.SUN' | translate}}</span>
+            <div *ngIf="isAiLoading && activeAiMode === 'sun'" class="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+          </button>
 
-            <!-- Detail 2: Wind -->
-            <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-inner hover:bg-white/30 transition-colors duration-300">
-              <i class="bi text-2xl mb-2 opacity-90" [class]="getWindDirectionIcon(currentWeather.windDirection)"></i>
-              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">{{ 'WEATHER_CARD.WIND' | translate}}</span>
-              <span class="text-xl font-bold"> {{ currentWeather.windSpeed }}
-                  <span class="text-[10px] font-bold">km/h</span>
-                </span>
-            </div>
+          <!-- Button 2: Energy -->
+          <button (click)="askAi('energy')"
+                  [disabled]="isAiLoading && activeAiMode === 'energy'"
+                  class="basis-[calc(50%-0.5rem)] md:flex-1 bg-white hover:bg-blue-50 text-slate-700 font-semibold py-4 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 border border-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">          <span class="text-2xl">⚡</span>
+            <span>{{ 'AI_SECTION.ENERGY' | translate}}</span>
+            <div *ngIf="isAiLoading && activeAiMode === 'energy'" class="w-4 h-4 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>
+          </button>
 
-            <!-- Detail 3: Rain Chance (Simulado o real) -->
-            <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-inner hover:bg-white/30 transition-colors duration-300">
-              <i class="bi bi-umbrella text-2xl mb-2 opacity-90"></i>
-              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">{{ 'WEATHER_CARD.RAIN_CHANCE' | translate}}</span>
-              <!-- Asume que precipitationProbabilityMax existe en el forecast del día 0 -->
-              <span class="text-xl font-bold">{{ forecast?.days?.[0]?.precipitationProbabilityMax || 0 }}%</span>
-            </div>
-
-            <!-- Detail 4: Cloud Cover -->
-            <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-inner hover:bg-white/30 transition-colors duration-300">
-              <i class="bi bi-cloud text-2xl mb-2 opacity-90"></i>
-              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">{{ 'WEATHER_CARD.CLOUD_COVER' | translate}}</span>
-              <span class="text-xl font-bold">{{ currentWeather.cloudCover }}%</span>
-            </div>
-
-            <!-- Detail 4: Cloud Cover -->
-            <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-inner hover:bg-white/30 transition-colors duration-300">
-              <i class="bi bi-sun text-2xl mb-2 opacity-90"></i>
-              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">{{ 'WEATHER_CARD.UV_INDEX' | translate}}</span>
-              <span class="text-xl font-bold">{{ currentWeather.uvIndex }}</span>
-            </div>
-
-            <!-- Detail 4: Cloud Cover -->
-            <div class="bg-white/20 backdrop-blur-sm rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-inner hover:bg-white/30 transition-colors duration-300">
-              <i class="bi bi-wind text-2xl mb-2 opacity-90"></i>
-              <span class="text-xs font-bold tracking-widest opacity-70 mb-1">{{ 'WEATHER_CARD.WIND_GUSTS' | translate}}</span>
-              <span class="text-xl font-bold">{{ currentWeather.windGusts }}
-                <span class="text-[10px] font-bold">km/h</span>
-                </span>
-            </div>
-
-          </div>
         </div>
 
+        <!-- AI Response Card -->
+        <div *ngIf="viewMode === 'air' && aiResponse" class="bg-white rounded-3xl p-6 shadow-xl border-l-8 border-blue-500 relative overflow-hidden transition-all duration-500 ease-in-out animate-fade-in-up mb-12">
+          <div class="absolute top-0 right-0 p-4 opacity-5 text-blue-500">
+            <i class="bi bi-chat-quote-fill text-6xl"></i>
+          </div>
+          <h6 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">
+            {{ activeAiMode === 'sun' ? 'SUN PROTECTION RECOMMENDATION' : activeAiMode === 'energy' ? 'MAXIMIZE YOUR SOLAR PRODUCTION' : '' }}
+          </h6>
+          <p class="text-lg text-slate-700 leading-relaxed font-medium whitespace-pre-line">{{ aiResponse }}</p>
+          <span class="block text-sm text-slate-400 leading-relaxed font-medium border-t border-slate-100 pt-4 mt-6">{{ 'AI_SECTION.DISCLAIMER' | translate }}</span>
+
+        </div>
+
+        <p *ngIf="aiError" class="text-red-500 text-sm mt-3 font-medium text-center bg-red-50 p-2 rounded-lg">{{ aiError }}</p>
+      </div>
+
+      <h3 class="text-xl font-bold text-slate-800 mb-5">{{ '24_HOUR_FORECAST.TITLE_SUN' | translate }}</h3>
+      <div class="flex overflow-x-auto pb-6 gap-2 snap-x">
+        <div *ngFor="let hourItem of forecast.hours"
+             class="min-w-[110px] bg-white rounded-3xl p-4 flex flex-col items-center justify-between shadow-md border border-slate-50 h-40 snap-start">
+          <div class="text-center">
+            <span class="block text-slate-400 font-bold uppercase text-xs mb-1">{{ hourItem.hour | date:'HH:mm' }}</span>
+            <span class="block text-slate-800 font-medium text-[10px]">{{ (isToday(hourItem.hour) ? '24_HOUR_FORECAST.TODAY' : '24_HOUR_FORECAST.TOMORROW') | translate }}</span>
+          </div>
+          <div class="text-2xl font-black" [ngClass]="getUvColorClass(hourItem.uv_index)">
+            {{ hourItem.uv_index }}
+          </div>
+          <div class="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden">
+            <div [ngClass]="getUvBarColorClass(hourItem.uv_index)" class="h-full" [style.width.%]="(hourItem.uv_index / 12) * 100"></div>
+          </div>
+          <span class="text-[9px] text-slate-400 font-bold uppercase">{{ '24_HOUR_FORECAST.UV_INDEX' | translate}}</span>
+        </div>
       </div>
     </div>
 
-    <!-- AI ASSISTANT SECTION -->
-    <div *ngIf="viewMode === 'air' && currentWeather" class="mb-12 animate-fade-in-up">
-      <h3 class="text-xl font-bold text-slate-800 mb-5 flex items-center gap-2">
-        {{ 'AI_SECTION.TITLE' | translate}}
-      </h3>
 
-      <div class="flex flex-wrap gap-4 justify-center md:justify-start mb-12">
-        <!-- Button 1: Outfit -->
-        <button (click)="askAi('outfit')"
-                [disabled]="isAiLoading && activeAiMode === 'outfit'"
-                class="basis-[calc(50%-0.5rem)] md:flex-1 bg-white hover:bg-blue-50 text-slate-700 font-semibold py-4 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 border border-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">          <span class="text-2xl">🧥</span>
-          <span>{{ 'AI_SECTION.OUTFIT' | translate}}</span>
-          <div *ngIf="isAiLoading && activeAiMode === 'outfit'" class="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        </button>
-
-        <!-- Button 2: City Guide -->
-        <button (click)="askAi('activity')"
-                [disabled]="isAiLoading && activeAiMode === 'activity'"
-                class="basis-[calc(50%-0.5rem)] md:flex-1 bg-white hover:bg-blue-50 text-slate-700 font-semibold py-4 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 border border-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">          <span class="text-2xl">🚲</span>
-          <span>{{ 'AI_SECTION.ACTIVITY' | translate}}</span>
-          <div *ngIf="isAiLoading && activeAiMode === 'activity'" class="w-4 h-4 border-2 border-green-500 border-t-transparent rounded-full animate-spin"></div>
-        </button>
-
-        <!-- Button 3: Wash Clothes -->
-        <button (click)="askAi('laundry')"
-                [disabled]="isAiLoading && activeAiMode === 'laundry'"
-                class="basis-[calc(50%-0.5rem)] md:flex-1 bg-white hover:bg-blue-50 text-slate-700 font-semibold py-4 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 border border-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">          <span class="text-2xl">🧺</span>
-          <span>{{ 'AI_SECTION.LAUNDRY' | translate}}</span>
-          <div *ngIf="isAiLoading && activeAiMode === 'laundry'" class="w-4 h-4 border-2 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
-        </button>
-
-        <!-- Button 3: Wash Clothes -->
-        <button (click)="askAi('drink')"
-                [disabled]="isAiLoading && activeAiMode === 'drink'"
-                class="basis-[calc(50%-0.5rem)] md:flex-1 bg-white hover:bg-blue-50 text-slate-700 font-semibold py-4 rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-3 border border-slate-100 disabled:opacity-50 disabled:cursor-not-allowed">        <span class="text-2xl">🍻</span>
-          <span>{{ 'AI_SECTION.DRINK' | translate}}</span>
-          <div *ngIf="isAiLoading && activeAiMode === 'drink'" class="w-4 h-4 border-2 border-orange-500 border-t-transparent rounded-full animate-spin"></div>
-        </button>
-      </div>
-
-      <!-- AI Response Card -->
-      <div *ngIf="viewMode === 'air' && aiResponse" class="bg-white rounded-3xl p-6 shadow-xl border-l-8 border-blue-500 relative overflow-hidden transition-all duration-500 ease-in-out animate-fade-in-up mb-12">
-        <div class="absolute top-0 right-0 p-4 opacity-5 text-blue-500">
-          <i class="bi bi-chat-quote-fill text-6xl"></i>
-        </div>
-        <h6 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">
-          {{ activeAiMode === 'outfit' ? 'STYLE RECOMMENDATION' : activeAiMode === 'laundry' ? 'LAUNDRY ADVICE' : activeAiMode === 'activity' ? 'LOCAL SUGGESTIONS' : 'DRINK IN STYLE' }}
-        </h6>
-        <p class="text-lg text-slate-700 leading-relaxed font-medium whitespace-pre-line">{{ aiResponse }}</p>
-        <span class="block text-sm text-slate-400 leading-relaxed font-medium border-t border-slate-100 pt-4 mt-6">{{ 'AI_SECTION.DISCLAIMER' | translate }}</span>
-      </div>
-
-      <p *ngIf="aiError" class="text-red-500 text-sm mt-3 font-medium text-center bg-red-50 p-2 rounded-lg">{{ aiError }}</p>
-
-
-      <!-- 24-HOUR FORECAST -->
-      <div *ngIf="viewMode === 'air' && forecast" class="mb-12">
-        <h3 class="text-xl font-bold text-slate-800 mb-5">{{ '24_HOUR_FORECAST.TITLE_WEATHER' | translate}}</h3>
-
-        <!-- Horizontal Scroll Container -->
-        <div class="flex overflow-x-auto pb-6 gap-2 snap-x">
-          <div *ngFor="let hourItem of forecast.hours"
-               class="min-w-[120px] bg-white rounded-3xl p-4 flex flex-col items-center justify-between shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start border border-slate-100 h-48">
-
-            <div class="text-center">
-              <span class="block text-slate-400 font-bold uppercase text-xs mb-1">{{ hourItem.hour | date:'HH:mm' }}</span>
-              <span class="block text-slate-800 font-medium text-[10px]">{{ (isToday(hourItem.hour) ? '24_HOUR_FORECAST.TODAY' : '24_HOUR_FORECAST.TOMORROW') | translate }}</span>
-            </div>
-
-            <i class="bi text-3xl my-2"
-               [class.bi-cloud-rain-fill]="hourItem.precipitation_probability > 40"
-               [class.bi-cloud-sun-fill]="hourItem.precipitation_probability <= 40 && hourItem.precipitation_probability > 10"
-               [class.bi-sun-fill]="hourItem.precipitation_probability <= 10"
-               [class.text-blue-500]="hourItem.precipitation_probability > 40"
-               [class.text-yellow-500]="hourItem.precipitation_probability <= 10"
-               [class.text-slate-400]="hourItem.precipitation_probability <= 40 && hourItem.precipitation_probability > 10">
-            </i>
-
-            <div class="text-center">
-              <span class="text-slate-400 font-medium text-sm ml-1">{{ hourItem.rain }}mm</span>
-            </div>
-
-            <div class="text-center">
-              <span class="text-slate-800 font-bold text-lg">{{ hourItem.temperature_2m }}°</span>
-            </div>
-
-            <!-- Rain Pill -->
-            <div class="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 mt-2">
-              <i class="bi bi-umbrella-fill text-[10px]"></i>
-              {{ hourItem.precipitation_probability }}%
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 7-DAY FORECAST -->
-      <div *ngIf="viewMode === 'air' && forecast" class="mb-12">
-        <!-- Título MODIFICADO aquí a petición del usuario -->
-        <h3 class="text-xl font-bold text-slate-800 mb-5">{{ '7_DAY_FORECAST.TITLE' | translate}}</h3>
-
-        <!-- Horizontal Scroll Container -->
-        <div class="flex overflow-x-auto pb-6 gap-2 snap-x">
-          <div *ngFor="let day of forecast.days"
-               class="min-w-[120px] bg-white rounded-3xl p-4 flex flex-col items-center justify-between shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 snap-start border border-slate-100 h-48">
-
-            <div class="text-center">
-              <span class="block text-slate-400 font-bold uppercase text-xs mb-1">{{ '7_DAY_FORECAST.' + (day.date | date:'EEE' | uppercase) | translate }}</span>
-              <span class="block text-slate-800 font-bold text-sm">{{ day.date | date:'dd' }}</span>
-            </div>
-
-            <i class="bi text-3xl my-2"
-               [class.bi-cloud-rain-fill]="day.precipitationProbabilityMax > 40"
-               [class.bi-cloud-sun-fill]="day.precipitationProbabilityMax <= 40 && day.precipitationProbabilityMax > 10"
-               [class.bi-sun-fill]="day.precipitationProbabilityMax <= 10"
-               [class.text-blue-500]="day.precipitationProbabilityMax > 40"
-               [class.text-yellow-500]="day.precipitationProbabilityMax <= 10"
-               [class.text-slate-400]="day.precipitationProbabilityMax <= 40 && day.precipitationProbabilityMax > 10">
-            </i>
-
-            <div class="text-center">
-              <span class="text-slate-800 font-bold text-lg">{{ day.temperatureMax }}°</span>
-              <span class="text-slate-400 font-medium text-sm ml-1">{{ day.temperatureMin }}°</span>
-            </div>
-
-            <!-- Rain Pill -->
-            <div class="bg-blue-50 text-blue-600 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 mt-2">
-              <i class="bi bi-umbrella-fill text-[10px]"></i>
-              {{ day.precipitationProbabilityMax }}%
-            </div>
-          </div>
-        </div>
-      </div>
-
-  </div>
+</div>
 </div>
