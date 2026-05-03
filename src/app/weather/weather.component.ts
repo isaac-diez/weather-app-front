@@ -21,6 +21,7 @@ export class WeatherComponent implements OnInit, OnDestroy {
   currentWeather?: CurrentWeatherDTO;
   forecast?: ForecastDTO;
   solarSummary?: SolarSummaryDTO;
+  airSummary?: AirQualityCurrentDTO;
   error?: string;
 
   // AI State
@@ -119,6 +120,7 @@ loadWeather() {
       this.currentWeather = data.current;
       this.forecast = data.forecast;
       this.solarSummary = data.solar;
+      this.airSummary = data.airQuality?.current;
       this.isWeatherLoading = false;
     },
     error: (err) => {
@@ -192,6 +194,69 @@ changeView(mode: 'general' | 'solar' | 'air') {
   this.activeAiMode = null;
   this.aiError = null;
 }
+
+  getAqiColor(aqi: number): string {
+    if (aqi <= 20) return '#50f0e6';
+    if (aqi <= 40) return '#50ccaa';
+    if (aqi <= 60) return '#f0e641';
+    if (aqi <= 80) return '#ff5050';
+    if (aqi <= 100) return '#960032';
+    return '#960032';
+  }
+
+  getAqiAdvice(aqi: number): string {
+    if (aqi <= 20) return 'AIR_ADVICE.GOOD';
+    if (aqi <= 40) return 'AIR_ADVICE.MODERATE';
+    if (aqi <= 65) return 'AIR_ADVICE.UNHEALTHY_SENSITIVE';
+    if (aqi <= 80) return 'AIR_ADVICE.UNHEALTHY';
+    if (aqi <= 100) return 'AIR_ADVICE.VERY_UNHEALTHY';
+    return 'AIR_ADVICE.HAZARDOUS';
+  }
+
+  getPm25Color(pm25: number): string {
+    if (pm25 <= 10) return '#50f0e6';
+    if (pm25 <= 20) return '#50ccaa';
+    if (pm25 <= 25) return '#f0e641';
+    if (pm25 <= 50) return '#ff5050';
+    if (pm25 <= 75) return '#960032';
+    return '#960032';
+  }
+
+  getPm10Color(pm10: number): string {
+    if (pm10 <= 20) return '#50f0e6';
+    if (pm10 <= 40) return '#50ccaa';
+    if (pm10 <= 55) return '#f0e641';
+    if (pm10 <= 100) return '#ff5050';
+    if (pm10 <= 150) return '#960032';
+    return '#960032';
+  }
+
+  getNo2Color(no2: number): string {
+    if (no2 <= 40) return '#50f0e6';
+    if (no2 <= 90) return '#50ccaa';
+    if (no2 <= 120) return '#f0e641';
+    if (no2 <= 230) return '#ff5050';
+    if (no2 <= 340) return '#960032';
+    return '#960032';
+  }
+
+  getO3Color(o3: number): string {
+    if (o3 <= 50) return '#50f0e6';
+    if (o3 <= 100) return '#50ccaa';
+    if (o3 <= 130) return '#f0e641';
+    if (o3 <= 240) return '#ff5050';
+    if (o3 <= 380) return '#960032';
+    return '#960032';
+  }
+
+  getSo2Color(so2: number): string {
+    if (so2 <= 100) return '#50f0e6';
+    if (so2 <= 200) return '#50ccaa';
+    if (so2 <= 350) return '#f0e641';
+    if (so2 <= 500) return '#ff5050';
+    if (so2 <= 750) return '#960032';
+    return '#960032';
+  }
 
   askAi(mode: 'outfit' | 'activity' | 'laundry' | 'drink' | 'sun' | 'energy') {
     if (!this.currentWeather || !this.selectedCity) return;
